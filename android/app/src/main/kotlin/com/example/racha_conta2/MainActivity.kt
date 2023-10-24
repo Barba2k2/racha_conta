@@ -1,4 +1,4 @@
-package com.example.racha_conta2
+package com.example.racha_conta
 
 import io.flutter.embedding.android.FlutterActivity
 
