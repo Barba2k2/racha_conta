@@ -29,7 +29,7 @@ Racha Conta é um aplicativo de controle de gastos desenvolvido para ajudar voc�
 O Racha Conta está disponível para download na Google Play Store e na Apple App Store. Clique nos links abaixo para baixar:
 
 - [Download para Android](url-da-google-play-store)
-- [Download para iOS](url-da-apple-app-store)
+- [Download para iOS] - EM BREVE
 
 ## Suporte:
 

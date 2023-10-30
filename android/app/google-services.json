@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "546634398752",
+    "project_id": "racha-conta-a5620",
+    "storage_bucket": "racha-conta-a5620.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546634398752:android:a181370d39177844bcd045",
+        "android_client_info": {
+          "package_name": "com.fho.racha_conta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtU7t8rHQ_U2OB3oCb9LNcV4tzpIUzv8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
