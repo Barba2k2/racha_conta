@@ -35,6 +35,66 @@ class UserRepository extends GetxController {
     }
   }
 
+  Future<String> createUserWithGoogle(UserModel user) async {
+    try {
+      //@ Verifica se o usuário ja existe baseado no e-mail
+      if (await recordExist(user.email)) {
+        throw 'Este email já está cadastrado!';
+      } else {
+        // Obtem uma referencia ao docuemnto que você quer adciionar/definir
+        DocumentReference docRef = _db.collection('Users').doc(user.id);
+
+        // Adcionar o UserModel ao FireStore
+        await docRef.set({user.toJson()});
+        log('Docuemnto do usuário pelo google: ${docRef.id}');
+        return docRef.id;
+      }
+    } on FirebaseAuthException catch (e) {
+      final result = MyExceptions.fromCode(e.code);
+      throw result.message;
+    } on FirebaseException catch (e) {
+      throw e.message.toString();
+    } catch (e) {
+      throw e.toString().isEmpty
+          ? 'Algo deu errado. Por favor, tente novamente'
+          : e.toString();
+    }
+  }
+
+  Future<UserModel> getUserDetails(String email) async {
+    try {
+      final snapshot = await _db.collection('Users').where('E-mail', isEqualTo: email).get();
+      if(snapshot.docs.isEmpty) throw 'Nunhum usuário encontrado';
+
+      final userData = snapshot.docs.map((e) => UserModel.fromSnapshot(e)).single;
+      return userData;
+    } on FirebaseAuthException catch (e) {
+      final result = MyExceptions.fromCode(e.code);
+      throw result.message;
+    } on FirebaseException catch (e) {
+      throw e.message.toString();
+    } catch (e) {
+      throw e.toString().isEmpty ? 'Algo deu errado. Por favor, tente novamente.' : e.toString();
+    }
+  }
+
+  Future<UserModel> getUserNameDetails(String name) async {
+    try {
+      final snapshot = await _db.collection('Users').where('Nome Completo', isEqualTo: name).get();
+      if(snapshot.docs.isEmpty) throw 'Usuário não encontrado';
+
+      final userData = snapshot.docs.map((e) => UserModel.fromSnapshot(e)).single;
+      return userData;
+    } on FirebaseAuthException catch (e) {
+      final result = MyExceptions.fromCode(e.code);
+      throw result.message;
+    } on FirebaseException catch (e) {
+      throw e.message.toString();
+    } catch (e) {
+      throw e.toString().isEmpty ? 'Algo deu errado. Por favor, tente novamente.' : e.toString();
+    }
+  }
+
   //% Verifica se o usuário existe com e email ou telefone informado
   Future<bool> recordExist(String email) async {
     try {
