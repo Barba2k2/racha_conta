@@ -95,6 +95,38 @@ class UserRepository extends GetxController {
     }
   }
 
+  Future<void> updateUserRecord(UserModel user) async {
+    try {
+      await _db.collection('Users').doc(user.id).update(user.toJson());
+    } on FirebaseAuthException catch (e) {
+      final result = MyExceptions.fromCode(e.code);
+      throw result.message;
+    } on FirebaseException catch (e) {
+      throw e.message.toString();
+    } catch (e) {
+      throw e.toString().isEmpty ? 'Algo deu errado. Por favor, tente novamente.' : e.toString();
+    }
+  }
+
+  Future<UserModel> getUserDetailsById(String uid) async {
+    try {
+      final snapshot = await _db.collection("Users").doc(uid).get();
+      if (!snapshot.exists || snapshot.data() == null) {
+        throw 'Nenhum usuário encontrado';
+      }
+      return UserModel.fromSnapshot(snapshot);
+    } on FirebaseAuthException catch (e) {
+      final result = MyExceptions.fromCode(e.code);
+      throw result.message;
+    } on FirebaseException catch (e) {
+      throw e.message.toString();
+    } catch (e) {
+      throw e.toString().isEmpty
+          ? 'Algo deu errado. Por favor, tente novamente'
+          : e.toString();
+    }
+  }
+
   //% Verifica se o usuário existe com e email ou telefone informado
   Future<bool> recordExist(String email) async {
     try {
