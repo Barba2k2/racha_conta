@@ -111,6 +111,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   //* ---------------------------- LOGIN Social --------------------------------- *//
+
   /// [GoogleAuthentication] - GOOGLE
   Future<UserCredential?> signInWithGoogle() async {
     try {
@@ -145,7 +146,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  Future<void> resetPassword(String email) async {
+  Future<void> resetPasswordEmail(String email) async {
     try {
       FirebaseAuth auth = FirebaseAuth.instance;
 
