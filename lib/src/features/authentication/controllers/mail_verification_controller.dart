@@ -67,4 +67,31 @@ class MailVerificationController extends GetxController {
       log('Erro no timer de redirecionamente: $e');
     }
   }
+
+  void manuallyCheckEmailVerifcationStatus() async {
+    try {
+      try {
+        await Future.delayed(const Duration(seconds: 1));
+        // Recarrega as informações do usuário
+        await FirebaseAuth.instance.currentUser?.reload();
+      } catch (e) {
+        throw ("Erro ao recarregar o usuário: $e");
+      }
+
+      final user = FirebaseAuth.instance.currentUser;
+
+      // Se o e-mail do usuário foi verificado, redireciona para a tela inicial
+      if (user!.emailVerified) {
+        AuthenticationRepository.instance.setInitialScreen(user);
+      } else {
+        // Se não, exibe uma mensagem de erro
+        Helper.errorSnackBar(
+          title: "Erro",
+          message: "E-mail ainda não verificado",
+        );
+      }
+    } catch (e) {
+      log("Erro na checagem de status de email: $e");
+    }
+  }
 }
