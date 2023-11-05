@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:racha_conta/src/widgets/expense/all_expenses/expenses.dart';
 
 import 'controllers/theme_controller/theme_controller.dart';
+import 'expenses/all_expenses/expenses.dart';
 import 'utils/app_bindings.dart';
 import 'utils/theme/theme.dart';
 

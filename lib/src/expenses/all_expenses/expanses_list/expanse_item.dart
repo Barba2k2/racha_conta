@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../models/expense.dart';
+import '../../../models/expense_model.dart';
 
 class ExpenseItem extends StatelessWidget {
   const ExpenseItem(this.expense, {super.key});
@@ -18,9 +18,15 @@ class ExpenseItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Titulo
-              Text(
-                expense.title,
-                style: Theme.of(context).textTheme.titleLarge,
+              Row(
+                children: [
+                  Text(
+                    expense.title,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(width: 8),
+                  Icon(categoryIcons[expense.category]),
+                ],
               ),
               const Gap(4),
               Row(
@@ -29,13 +35,7 @@ class ExpenseItem extends StatelessWidget {
                   Text('R\$ ${expense.amount.toStringAsFixed(2)}'),
                   const Spacer(),
                   // Item da categoria + Data
-                  Row(
-                    children: [
-                      Icon(categoryIcons[expense.category]),
-                      const SizedBox(width: 8),
-                      Text(expense.formattedDate),
-                    ],
-                  ),
+                  Text(expense.formattedDate),
                 ],
               ),
             ],

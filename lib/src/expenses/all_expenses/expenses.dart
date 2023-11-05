@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:racha_conta/src/widgets/expense/all_expenses/chart/chart.dart';
 
+import '../../models/expense_model.dart';
+import 'chart/chart.dart';
 import 'expanses_list/expenses_list.dart';
-import '../../../models/expense.dart';
 import '../new_expense/new_expense.dart';
 
 class Expenses extends StatefulWidget {
@@ -73,7 +73,6 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
 
     Widget mainContent = const Center(
       child: Padding(
@@ -93,6 +92,7 @@ class _ExpensesState extends State<Expenses> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Racha Conta'),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: _openAddExpanseOverlay,
@@ -100,26 +100,15 @@ class _ExpensesState extends State<Expenses> {
           ),
         ],
       ),
-      body: width < 600
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Chart(expenses: _registeredExpenses),
-                Expanded(
-                  child: mainContent,
-                ),
-              ],
-            )
-          : Row(
-              children: [
-                Expanded(
-                  child: Chart(expenses: _registeredExpenses),
-                ),
-                Expanded(
-                  child: mainContent,
-                ),
-              ],
-            ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Chart(expenses: _registeredExpenses),
+          Expanded(
+            child: mainContent,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,18 +1,33 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 final formatter = DateFormat.yMd();
 
 const uuid = Uuid();
 
-enum Category { comida, viagem, lazer, trabalho }
+enum Category {
+  comida,
+  viagem,
+  lazer,
+  trabalho,
+  combustivel,
+  moradia,
+  reparos,
+}
 
 const categoryIcons = {
-  Category.comida: Icons.lunch_dining,
-  Category.viagem: Icons.flight_takeoff,
-  Category.lazer: Icons.movie,
-  Category.trabalho: Icons.work,
+  Category.combustivel: LineAwesomeIcons.gas_pump,
+  Category.comida: Icons.lunch_dining_rounded,
+  Category.lazer: LineAwesomeIcons.gamepad,
+  Category.moradia: LineAwesomeIcons.home,
+  Category.reparos: CupertinoIcons.wrench_fill, // ou LineAwesomeIcons.tools
+  Category.trabalho:
+      CupertinoIcons.briefcase_fill, // ou LineAwesomeIcons.briefcase
+  Category.viagem:
+      CupertinoIcons.airplane, // ou LineAwesomeIcons.plane_departure
 };
 
 class Expense {

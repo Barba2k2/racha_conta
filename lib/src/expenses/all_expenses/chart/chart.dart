@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:racha_conta/src/models/expense.dart';
+import 'package:racha_conta/src/models/expense_model.dart';
 
 import 'chart_bar.dart';
 

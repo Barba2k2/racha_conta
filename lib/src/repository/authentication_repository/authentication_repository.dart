@@ -6,7 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../widgets/expense/all_expenses/expenses.dart';
+import '../../expenses/all_expenses/expenses.dart';
 import 'exceptions/exceptions.dart';
 import 'result/login_result.dart';
 

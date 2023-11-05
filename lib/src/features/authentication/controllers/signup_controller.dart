@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:racha_conta/src/widgets/expense/all_expenses/expenses.dart';
 
+import '../../../expenses/all_expenses/expenses.dart';
 import '../../../repository/authentication_repository/authentication_repository.dart';
 
 class SignUpController extends GetxController {
