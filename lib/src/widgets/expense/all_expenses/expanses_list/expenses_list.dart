@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/expense.dart';
+import '../../../../models/expense.dart';
 import 'expanse_item.dart';
 
 class ExpenseList extends StatelessWidget {
@@ -21,9 +21,7 @@ class ExpenseList extends StatelessWidget {
         key: ValueKey(expenses[index]),
         background: Container(
           color: Theme.of(context).colorScheme.error.withOpacity(.75),
-          margin: EdgeInsets.symmetric(
-            horizontal: Theme.of(context).cardTheme.margin!.horizontal,
-          ),
+          margin: const EdgeInsets.symmetric(horizontal: 10),
         ),
         onDismissed: (direction) {
           onRemoveExpense(expenses[index]);

@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:racha_conta/src/widgets/chart/chart.dart';
+import 'package:racha_conta/src/widgets/expense/all_expenses/chart/chart.dart';
 
 import 'expanses_list/expenses_list.dart';
-import '../models/expense.dart';
-import 'new_expense.dart';
+import '../../../models/expense.dart';
+import '../new_expense/new_expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({Key? key}) : super(key: key);

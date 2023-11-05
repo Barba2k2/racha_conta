@@ -14,5 +14,5 @@ Future<void> main() async {
     log(details.stack.toString());
   };
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
