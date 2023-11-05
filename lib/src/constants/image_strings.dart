@@ -1,0 +1,1 @@
+const String googleLogo = 'assets/images/google.png';
