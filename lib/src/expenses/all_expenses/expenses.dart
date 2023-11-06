@@ -15,18 +15,20 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  final List<Expense> _registeredExpenses = [
-    Expense(
+  final List<ExpenseModel> _registeredExpenses = [
+    ExpenseModel(
       title: 'Jetete',
       amount: 19.99,
       date: DateTime.now(),
       category: Category.trabalho,
+      description: 'Teste',
     ),
-    Expense(
+    ExpenseModel(
       title: 'Cinema',
       amount: 15.69,
       date: DateTime.now(),
       category: Category.lazer,
+      description: 'Pipoca e ingresso',
     ),
   ];
 
@@ -40,13 +42,13 @@ class _ExpensesState extends State<Expenses> {
     );
   }
 
-  void _addExpense(Expense expense) {
+  void _addExpense(ExpenseModel expense) {
     setState(() {
       _registeredExpenses.add(expense);
     });
   }
 
-  void _removeExpense(Expense expense) {
+  void _removeExpense(ExpenseModel expense) {
     final expenseIndex = _registeredExpenses.indexOf(expense);
     setState(() {
       _registeredExpenses.remove(expense);
@@ -73,7 +75,6 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
-
     Widget mainContent = const Center(
       child: Padding(
         padding: EdgeInsets.all(16),

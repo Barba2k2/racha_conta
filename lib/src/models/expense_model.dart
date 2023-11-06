@@ -30,12 +30,13 @@ const categoryIcons = {
       CupertinoIcons.airplane, // ou LineAwesomeIcons.plane_departure
 };
 
-class Expense {
-  Expense({
+class ExpenseModel {
+  ExpenseModel({
     required this.title,
     required this.amount,
     required this.date,
     required this.category,
+    required this.description,
   }) : id = uuid.v4();
 
   final String id;
@@ -43,6 +44,7 @@ class Expense {
   final double amount;
   final DateTime date;
   final Category category;
+  final String description;
 
   String get formattedDate {
     return formatter.format(date);
@@ -54,13 +56,15 @@ class Expense {
 class ExpenseBucket {
   ExpenseBucket({required this.category, required this.expenses});
 
-  ExpenseBucket.forCategory(List<Expense> allExpanses, this.category)
+  ExpenseBucket.forCategory(List<ExpenseModel> allExpanses, this.category)
       : expenses = allExpanses
-            .where((expense) => expense.category == category)
+            .where(
+              (expense) => expense.category == category,
+            )
             .toList();
 
   final Category category;
-  final List<Expense> expenses;
+  final List<ExpenseModel> expenses;
 
   double get totalExpenses {
     double sum = 0;
