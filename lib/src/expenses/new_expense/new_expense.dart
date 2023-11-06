@@ -65,10 +65,12 @@ class _NewExpenseState extends State<NewExpense> {
     widget.onAddExpense(
       ExpenseModel(
         title: _titleController.text,
-        amount: enteredAmount,
+        ammount: enteredAmount,
         date: _selectedDate!,
         category: _selectedCategory,
         description: _expenseDescritption.text.trim(),
+        expenseId: '',
+        userId: '',
       ),
     );
     Navigator.pop(context);

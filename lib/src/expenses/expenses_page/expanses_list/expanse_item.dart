@@ -32,7 +32,7 @@ class ExpenseItem extends StatelessWidget {
               Row(
                 children: [
                   // Valor
-                  Text('R\$ ${expense.amount.toStringAsFixed(2)}'),
+                  Text('R\$ ${expense.ammount.toStringAsFixed(2)}'),
                   const Spacer(),
                   // Item da categoria + Data
                   Text(expense.formattedDate),

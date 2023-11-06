@@ -8,7 +8,8 @@ import 'expanses_list/expenses_list.dart';
 import '../new_expense/new_expense.dart';
 
 class Expenses extends StatefulWidget {
-  const Expenses({Key? key}) : super(key: key);
+  const Expenses({Key? key, this.expenseModel}) : super(key: key);
+  final ExpenseModel? expenseModel;
 
   @override
   State<Expenses> createState() => _ExpensesState();
@@ -18,17 +19,21 @@ class _ExpensesState extends State<Expenses> {
   final List<ExpenseModel> _registeredExpenses = [
     ExpenseModel(
       title: 'Jetete',
-      amount: 19.99,
+      ammount: 19.99,
       date: DateTime.now(),
       category: Category.trabalho,
       description: 'Teste',
+      expenseId: 'Despesa001',
+      userId: '',
     ),
     ExpenseModel(
       title: 'Cinema',
-      amount: 15.69,
+      ammount: 15.69,
       date: DateTime.now(),
       category: Category.lazer,
       description: 'Pipoca e ingresso',
+      expenseId: 'Despesa002',
+      userId: '',
     ),
   ];
 

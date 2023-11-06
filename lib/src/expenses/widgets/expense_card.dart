@@ -65,7 +65,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                         ),
                         Expanded(
                           child: Text(
-                            'R\$ ${widget.expenseModel!.amount.toString()}',
+                            'R\$ ${widget.expenseModel!.ammount.toString()}',
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
