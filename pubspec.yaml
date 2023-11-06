@@ -23,6 +23,7 @@ dependencies:
   google_sign_in: ^6.1.5
   flutter_native_splash: ^2.3.5
   line_awesome_flutter: ^2.0.0
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
