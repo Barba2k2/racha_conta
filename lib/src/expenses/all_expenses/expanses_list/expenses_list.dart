@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/expense_model.dart';
-import 'expanse_item.dart';
+import '../../widgets/expense_card.dart';
 
 class ExpenseList extends StatelessWidget {
   const ExpenseList({
@@ -10,15 +10,15 @@ class ExpenseList extends StatelessWidget {
     required this.onRemoveExpense,
   });
 
-  final List<Expense> expenses;
-  final void Function(Expense expense) onRemoveExpense;
+  final List<ExpenseModel> expenses;
+  final void Function(ExpenseModel expense) onRemoveExpense;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: expenses.length,
       itemBuilder: (ctx, index) => Dismissible(
-        key: ValueKey(expenses[index]),
+        key: ValueKey(expenses[index].id),
         background: Container(
           color: Theme.of(context).colorScheme.error.withOpacity(.75),
           margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -26,7 +26,9 @@ class ExpenseList extends StatelessWidget {
         onDismissed: (direction) {
           onRemoveExpense(expenses[index]);
         },
-        child: ExpenseItem(expenses[index]),
+        child: ExpenseCard(
+          expenseModel: expenses[index],
+        ),
       ),
     );
   }

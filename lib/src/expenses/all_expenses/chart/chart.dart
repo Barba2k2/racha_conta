@@ -7,7 +7,7 @@ import 'chart_bar.dart';
 class Chart extends StatelessWidget {
   const Chart({super.key, required this.expenses});
 
-  final List<Expense> expenses;
+  final List<ExpenseModel> expenses;
 
   List<ExpenseBucket> get buckets {
     return [
