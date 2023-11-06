@@ -7,7 +7,7 @@ import '../../models/expense_model.dart';
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key, required this.onAddExpense});
 
-  final void Function(Expense expense) onAddExpense;
+  final void Function(ExpenseModel expense) onAddExpense;
 
   @override
   State<NewExpense> createState() => _NewExpenseState();
@@ -16,6 +16,7 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  final _expenseDescritption = TextEditingController();
   DateTime? _selectedDate;
   Category _selectedCategory = Category.lazer;
 
@@ -62,11 +63,12 @@ class _NewExpenseState extends State<NewExpense> {
     }
 
     widget.onAddExpense(
-      Expense(
+      ExpenseModel(
         title: _titleController.text,
         amount: enteredAmount,
         date: _selectedDate!,
         category: _selectedCategory,
+        description: _expenseDescritption.text.trim(),
       ),
     );
     Navigator.pop(context);
@@ -125,6 +127,7 @@ class _NewExpenseState extends State<NewExpense> {
           ),
           const Gap(16),
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               DropdownButton(
                 value: _selectedCategory,
@@ -145,7 +148,19 @@ class _NewExpenseState extends State<NewExpense> {
                   });
                 },
               ),
-              const Spacer(),
+            ],
+          ),
+          const Gap(16),
+          TextField(
+            controller: _expenseDescritption,
+            maxLength: 500,
+            maxLines: 5,
+            decoration: const InputDecoration(
+              label: Text('Título'),
+            ),
+          ),
+          Row(
+            children: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: const Text('Cancelar'),
@@ -156,7 +171,7 @@ class _NewExpenseState extends State<NewExpense> {
                 child: const Text('Salvar Despesa'),
               ),
             ],
-          ),
+          )
         ],
       ),
     );
