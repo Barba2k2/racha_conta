@@ -33,16 +33,15 @@ class _ExpenseCardState extends State<ExpenseCard> {
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Container(
             width: double.infinity,
-            height: 140,
+            height: 100,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.teal,
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
               child: Row(
                 children: [
-                  const Gap(10),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,10 +79,32 @@ class _ExpenseCardState extends State<ExpenseCard> {
                     ),
                   ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       //@ Detalhes
-
+                      SizedBox(
+                        width: 120,
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Detalhes',
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                        ),
+                      ),
                       //# Editar
+                      SizedBox(
+                        width: 120,
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Editar',
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 ],
