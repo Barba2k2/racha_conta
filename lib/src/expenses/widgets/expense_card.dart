@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+// import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:racha_conta/src/constants/colors.dart';
+// import 'package:racha_conta/src/constants/colors.dart';
 import 'package:racha_conta/src/features/authentication/models/user_model.dart';
 
-import '../../controllers/theme_controller/theme_controller.dart';
+// import '../../controllers/theme_controller/theme_controller.dart';
 import '../../models/expense_model.dart';
 import '../controllers/user_controller.dart';
 
@@ -21,13 +21,13 @@ class _ExpenseCardState extends State<ExpenseCard> {
   Widget build(BuildContext context) {
     final UserController userController = Get.find();
 
-    final ThemeController themeController = Get.find();
-    final isDark = themeController.isDarkMode.value;
+    // final ThemeController themeController = Get.find();
+    // final isDark = themeController.isDarkMode.value;
 
     return StreamBuilder<UserModel?>(
       stream: userController.userStream,
       builder: (context, snapshot) {
-        final user = snapshot.data;
+        // final user = snapshot.data;
 
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
