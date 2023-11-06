@@ -29,8 +29,8 @@ class MyTextTheme {
       color: tDarkColor,
     ),
     headlineMedium: GoogleFonts.nunito(
-      fontSize: 18.0,
-      fontWeight: FontWeight.w600,
+      fontSize: 20.0,
+      fontWeight: FontWeight.w700,
       color: tDarkColor,
     ),
     headlineSmall: GoogleFonts.nunito(
@@ -82,8 +82,8 @@ class MyTextTheme {
       color: tWhiteColor,
     ),
     headlineMedium: GoogleFonts.nunito(
-      fontSize: 18.0,
-      fontWeight: FontWeight.w600,
+      fontSize: 20.0,
+      fontWeight: FontWeight.w700,
       color: tWhiteColor,
     ),
     headlineSmall: GoogleFonts.nunito(
