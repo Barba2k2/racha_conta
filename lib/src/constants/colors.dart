@@ -12,6 +12,7 @@ const tSecondaryColor = Color(0xFFE37423);
 const registerTextButtonColor = Color(0xFF0BEF82);
 
 const tDarkCard = Color.fromARGB(255, 74, 74, 74);
+const white70 = Colors.white70;
 
 //* -- BOTTOM NAVIGATION BAR
 const darkNavBar = Color(0xFF2F2F2F);
