@@ -7,7 +7,7 @@ const blackColor = Colors.black;
 var greyShade600 = Colors.grey.shade600;
 
 //* -- BUTTONS COLORS
-const tPrimaryColor = Color(0xFFE3A223);
+const tPrimaryColor = Color(0xFF8B10AE);
 const tSecondaryColor = Color(0xFFE37423);
 const registerTextButtonColor = Color(0xFF0BEF82);
 
