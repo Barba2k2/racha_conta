@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'controllers/theme_controller/theme_controller.dart';
-import 'expenses/all_expenses/expenses.dart';
+import 'expenses/expenses_page/expenses.dart';
 import 'utils/app_bindings.dart';
 import 'utils/theme/theme.dart';
 

@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../expenses/all_expenses/expenses.dart';
+import '../../../expenses/expenses_page/expenses.dart';
 import '../../../repository/authentication_repository/authentication_repository.dart';
 
 class SignUpController extends GetxController {
