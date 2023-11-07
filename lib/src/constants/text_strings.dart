@@ -135,3 +135,7 @@ const String delete = 'Apagar';
 //* -- Pagina Atualizar Perfil --
 const String updateProfile = 'Atualizar Perfil';
 const String deleteAccount = 'Apagar Conta';
+
+//# -- Add Expense Title --
+const String errorMessage = 'Dados INválidos';
+const String verifyData = 'Por favor, verifique se inseriu um titulo, valor, data e categoria corretamente.';
