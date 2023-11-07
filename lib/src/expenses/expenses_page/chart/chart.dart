@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:racha_conta/src/models/expense_model.dart';
 
+import '../../../constants/colors.dart';
 import 'chart_bar.dart';
 
 class Chart extends StatelessWidget {
@@ -15,6 +16,9 @@ class Chart extends StatelessWidget {
       ExpenseBucket.forCategory(expenses, Category.lazer),
       ExpenseBucket.forCategory(expenses, Category.viagem),
       ExpenseBucket.forCategory(expenses, Category.trabalho),
+      ExpenseBucket.forCategory(expenses, Category.combustivel),
+      ExpenseBucket.forCategory(expenses, Category.moradia),
+      ExpenseBucket.forCategory(expenses, Category.reparos),
     ];
   }
 
@@ -35,19 +39,12 @@ class Chart extends StatelessWidget {
     final isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Container(
       margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 8),
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
       width: double.infinity,
       height: 180,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).colorScheme.primary.withOpacity(.3),
-            Theme.of(context).colorScheme.primary.withOpacity(.0),
-          ],
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-        ),
+        color: expenseColorBg,
       ),
       child: Column(
         children: [
