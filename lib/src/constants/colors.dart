@@ -8,7 +8,7 @@ var greyShade600 = Colors.grey.shade600;
 
 //* -- BUTTONS COLORS
 const tPrimaryColor = Color(0xFF8B10AE);
-const tSecondaryColor = Color(0xFFE37423);
+const tSecondaryColor = Color(0xFF9923E3);
 const registerTextButtonColor = Color(0xFF0BEF82);
 
 const tDarkCard = Color.fromARGB(255, 74, 74, 74);
@@ -23,7 +23,6 @@ const whiteBgNavBar = Color(0xFFF3F3F3);
 const tSuccessSnackbar = Colors.green;
 const tWarningSnackbar = Colors.orange;
 const tErrorSnackbar = Colors.red;
-
 
 //* -- GENERAL COLROS
 const tWhiteColor = whiteColor;
@@ -43,3 +42,6 @@ const whiteInputText = whiteColor;
 //* -- REPORT DETAIL SCREEN
 const whiteContainer = Color(0xFFE0E0E0);
 const blackContainer = Color(0xFF424242);
+
+//* -- EXPENSE COLOR BG
+const expenseColorBg = Color(0xFFD9D9D9);
