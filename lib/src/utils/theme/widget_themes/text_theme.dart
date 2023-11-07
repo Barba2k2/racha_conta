@@ -92,7 +92,7 @@ class MyTextTheme {
       color: tWhiteColor,
     ),
     bodyLarge: GoogleFonts.nunito(
-      fontSize: 14,
+      fontSize: 16,
       fontWeight: FontWeight.w400,
       color: subtitleColor,
     ),
