@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import '../../constants/text_strings.dart';
 import '../../models/expense_model.dart';
 
 class NewExpense extends StatefulWidget {
@@ -40,15 +41,14 @@ class _NewExpenseState extends State<NewExpense> {
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
     if (_titleController.text.trim().isEmpty ||
         amountIsInvalid ||
-        _selectedDate == null) {
+        _selectedDate == null ||
+        _expenseDescritption.text.trim().isEmpty) {
       //! Mensagem de erro
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('Dados Inválidos'),
-          content: const Text(
-            'Por favor, verifique se inseriu um titulo, valor, data e categoria corretamente.',
-          ),
+          title: const Text(errorMessage),
+          content: const Text(verifyData),
           actions: [
             TextButton(
               onPressed: () {
@@ -91,8 +91,11 @@ class _NewExpenseState extends State<NewExpense> {
           TextField(
             controller: _titleController,
             maxLength: 50,
-            decoration: const InputDecoration(
-              label: Text('Título'),
+            decoration: InputDecoration(
+              label: Text(
+                'Título',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
             ),
           ),
           Row(
@@ -101,9 +104,12 @@ class _NewExpenseState extends State<NewExpense> {
                 child: TextField(
                   controller: _amountController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     prefixText: 'R\$ ',
-                    label: Text('Valor'),
+                    label: Text(
+                      'Valor',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
                   ),
                 ),
               ),
@@ -117,6 +123,7 @@ class _NewExpenseState extends State<NewExpense> {
                       _selectedDate == null
                           ? 'Nenhuma data \nselecionada'
                           : formatter.format(_selectedDate!),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     IconButton(
                       onPressed: _presentDatePicker,
@@ -157,20 +164,32 @@ class _NewExpenseState extends State<NewExpense> {
             controller: _expenseDescritption,
             maxLength: 500,
             maxLines: 5,
-            decoration: const InputDecoration(
-              label: Text('Título'),
+            decoration: InputDecoration(
+              label: Text(
+                'Descrição',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              alignLabelWithHint: true,
             ),
           ),
+          const Gap(16),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              TextButton(
+              OutlinedButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancelar'),
+                child: Text(
+                  'Cancelar',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
               const SizedBox(width: 10),
               ElevatedButton(
                 onPressed: _submitExpanseData,
-                child: const Text('Salvar Despesa'),
+                child: Text(
+                  'Salvar Despesa',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
             ],
           )
