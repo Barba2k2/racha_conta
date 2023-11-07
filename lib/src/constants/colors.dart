@@ -24,6 +24,7 @@ const tSuccessSnackbar = Colors.green;
 const tWarningSnackbar = Colors.orange;
 const tErrorSnackbar = Colors.red;
 
+
 //* -- GENERAL COLROS
 const tWhiteColor = whiteColor;
 const tDarkColor = Color(0xff272727);
