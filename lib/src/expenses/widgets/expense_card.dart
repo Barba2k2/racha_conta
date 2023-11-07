@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:racha_conta/src/features/authentication/models/user_model.dart';
 
 // import '../../controllers/theme_controller/theme_controller.dart';
+import '../../constants/colors.dart';
 import '../../models/expense_model.dart';
 import '../controllers/user_controller.dart';
 
@@ -30,13 +31,13 @@ class _ExpenseCardState extends State<ExpenseCard> {
         // final user = snapshot.data;
 
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
           child: Container(
             width: double.infinity,
             height: 100,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.teal,
+              color: expenseColorBg,
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
