@@ -8,6 +8,7 @@ import 'package:racha_conta/src/features/authentication/models/user_model.dart';
 import '../../constants/colors.dart';
 import '../../models/expense_model.dart';
 import '../controllers/user_controller.dart';
+import '../expense_details/expense_details.dart';
 
 class ExpenseCard extends StatefulWidget {
   const ExpenseCard({super.key, this.expenseModel});
@@ -87,7 +88,9 @@ class _ExpenseCardState extends State<ExpenseCard> {
                         width: 120,
                         height: 40,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(() => const ExpenseDatails());
+                          },
                           child: Text(
                             'Detalhes',
                             style: Theme.of(context).textTheme.headlineMedium,
