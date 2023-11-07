@@ -31,10 +31,10 @@ String formattedDate =
     '${currentDate.day.toString().padLeft(2, '0')}/${currentDate.month}/${currentDate.year}';
 
 const categoryIcons = {
-  Category.combustivel: LineAwesomeIcons.gas_pump,
+  Category.combustivel: Icons.local_gas_station_rounded,
   Category.comida: Icons.lunch_dining_rounded,
-  Category.lazer: LineAwesomeIcons.gamepad,
-  Category.moradia: LineAwesomeIcons.home,
+  Category.lazer: CupertinoIcons.gamecontroller_alt_fill,
+  Category.moradia: CupertinoIcons.house_fill,
   Category.reparos: CupertinoIcons.wrench_fill,
   Category.trabalho: CupertinoIcons.briefcase_fill,
   Category.viagem: CupertinoIcons.airplane,
