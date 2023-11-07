@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
+import '../../constants/text_strings.dart';
 import '../../models/expense_model.dart';
 import 'chart/chart.dart';
 import 'expanses_list/expenses_list.dart';
@@ -83,8 +85,7 @@ class _ExpensesState extends State<Expenses> {
     Widget mainContent = const Center(
       child: Padding(
         padding: EdgeInsets.all(16),
-        child: Text(
-            'Nenhuma conta encontrada. Começe a monitorar seus gastos com a sua galera!'),
+        child: Text(emptyExpenses),
       ),
     );
 
@@ -97,12 +98,20 @@ class _ExpensesState extends State<Expenses> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Racha Conta'),
+        title: Text(
+          'Racha Conta',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.displayLarge,
+        ),
         centerTitle: true,
+        backgroundColor: tPrimaryColor,
         actions: [
           IconButton(
             onPressed: _openAddExpanseOverlay,
-            icon: Icon(Icons.add),
+            icon: Icon(
+              Icons.add,
+              size: 32,
+            ),
           ),
         ],
       ),
