@@ -41,7 +41,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
               color: expenseColorBg,
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Row(
                 children: [
                   Expanded(
@@ -51,16 +51,18 @@ class _ExpenseCardState extends State<ExpenseCard> {
                         Expanded(
                           child: Row(
                             children: [
-                              Text(
-                                widget.expenseModel!.title,
-                                style:
-                                    Theme.of(context).textTheme.headlineLarge,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(width: 8),
                               Icon(
                                 categoryIcons[widget.expenseModel!.category],
                                 size: 24,
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  widget.expenseModel!.title,
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ],
                           ),
@@ -75,6 +77,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                           child: Text(
                             widget.expenseModel!.description,
                             style: Theme.of(context).textTheme.bodyLarge,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
