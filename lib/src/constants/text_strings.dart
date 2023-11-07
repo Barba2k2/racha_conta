@@ -136,6 +136,9 @@ const String delete = 'Apagar';
 const String updateProfile = 'Atualizar Perfil';
 const String deleteAccount = 'Apagar Conta';
 
-//# -- Add Expense Title --
+//# -- Add Expense Screen --
 const String errorMessage = 'Dados INválidos';
 const String verifyData = 'Por favor, verifique se inseriu um titulo, valor, data e categoria corretamente.';
+
+//$ Expenses Screen
+const String emptyExpenses = 'Nenhuma conta encontrada. Começe a monitorar seus gastos com a sua galera!';
