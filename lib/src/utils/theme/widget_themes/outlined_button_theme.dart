@@ -12,7 +12,6 @@ class MyOutlinedButtonTheme {
     style: OutlinedButton.styleFrom(
       foregroundColor: tSecondaryColor,
       side: const BorderSide(color: tSecondaryColor),
-      padding: const EdgeInsets.symmetric(vertical: tButtonHeight),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(tBorderRadius),
       ),
@@ -22,9 +21,8 @@ class MyOutlinedButtonTheme {
   /* -- Dark Theme -- */
   static final darkOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      foregroundColor: tWhiteColor,
-      side: const BorderSide(color: tWhiteColor),
-      padding: const EdgeInsets.symmetric(vertical: tButtonHeight),
+      foregroundColor: tSecondaryColor,
+      side: const BorderSide(color: tSecondaryColor),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(tBorderRadius),
       ),
