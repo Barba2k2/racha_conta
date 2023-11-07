@@ -62,7 +62,7 @@ class _ExpensesState extends State<Expenses> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: Duration(seconds: 5),
-        content: Text('Conta apagada.'),
+        content: Text('Despesa apagada.'),
         action: SnackBarAction(
           label: 'Desfazer',
           onPressed: () {
