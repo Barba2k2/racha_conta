@@ -26,8 +26,8 @@ Future<void> main() async {
 
   // Configura um manipulador global de erros para registrar exceções no Flutter
   FlutterError.onError = (FlutterErrorDetails details) {
-    log(details.exception.toString());
-    log(details.stack.toString());
+    log('Detalhes de exceção: ${details.exception}');
+    log('Detalhes de stack: ${details.stack}');
   };
 
   // Inicia o aplicativo
