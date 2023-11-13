@@ -5,12 +5,12 @@ import '../../Constants/colors.dart';
 class ClickableRichTextWidget extends StatelessWidget {
   // Construtor do widget.
   // Ele aceita dois textos (`text1` e `text2`) e uma função de callback (`onPressed`) como parâmetros.
-  const ClickableRichTextWidget({
-    Key? key, 
-    required this.text1, 
-    required this.text2, 
-    required this.onPressed
-  }) : super(key: key);
+  const ClickableRichTextWidget(
+      {Key? key,
+      required this.text1,
+      required this.text2,
+      required this.onPressed})
+      : super(key: key);
 
   // Declaração das variáveis membro.
   final String text1, text2;
@@ -21,20 +21,26 @@ class ClickableRichTextWidget extends StatelessWidget {
     // Um GestureDetector é usado para detectar toques.
     return GestureDetector(
       // Função a ser chamada quando o texto é tocado.
-      onTap: onPressed, 
+      onTap: onPressed,
       child: Padding(
         // Adiciona um preenchimento ao redor do texto.
-        padding: const EdgeInsets.all(8), 
+        padding: const EdgeInsets.all(8),
         child: Text.rich(
           // Exibe um texto combinando múltiplos estilos em sequência.
           TextSpan(
             children: [
               // Primeiro trecho de texto com estilo definido.
-              TextSpan(text: text1, style: Theme.of(context).textTheme.bodyMedium),
+              TextSpan(
+                text: text1,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
               // Segundo trecho de texto com estilo diferente e cor especificada.
               TextSpan(
                 text: text2,
-                style: Theme.of(context).textTheme.titleLarge!.apply(color: tFacebookBgColor),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .apply(color: tFacebookBgColor),
               ),
             ],
           ),

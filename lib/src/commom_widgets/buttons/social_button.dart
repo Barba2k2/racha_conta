@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'button_loading_widgte.dart';
 
-
 // Widget personalizado para um botão de mídia social.
 class SocialButton extends StatelessWidget {
   // Construtor que aceita parâmetros para personalizar o botão.
@@ -31,6 +30,7 @@ class SocialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: 60,
       width: double.infinity,
       child: ElevatedButton.icon(
         onPressed: onPressed,
@@ -40,14 +40,14 @@ class SocialButton extends StatelessWidget {
           backgroundColor: background,
           side: BorderSide.none,
         ),
-        // Exibe uma caixa vazia se `isLoading` for verdadeiro, 
+        // Exibe uma caixa vazia se `isLoading` for verdadeiro,
         // caso contrário, exibe a imagem fornecida.
         icon: isLoading
             ? const SizedBox()
             : Image(
                 image: AssetImage(image),
-                width: 24,
-                height: 24,
+                width: 28,
+                height: 28,
               ),
         // Exibe um widget de carregamento se `isLoading` for verdadeiro,
         // caso contrário, exibe o texto fornecido.
@@ -55,10 +55,7 @@ class SocialButton extends StatelessWidget {
             ? const ButtonLoadingWidget()
             : Text(
                 text,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .apply(color: foreground),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
       ),
     );

@@ -30,6 +30,7 @@ class MyPrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       // Define a largura com base na propriedade `isFullWidth`.
+      height: 60,
       width: isFullWidth ? double.infinity : width,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -39,7 +40,7 @@ class MyPrimaryButton extends StatelessWidget {
             ? const ButtonLoadingWidget()
             : Text(
                 text.toUpperCase(),
-                style: const TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 18),
               ),
       ),
     );
