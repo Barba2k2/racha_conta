@@ -85,6 +85,7 @@ class AuthenticationRepository extends GetxController {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
+      log('Erro do FirebaseAuth: $e');
       final ex = MyExceptions.fromCode(e.code);
       throw ex.message;
     } catch (e) {
@@ -104,6 +105,7 @@ class AuthenticationRepository extends GetxController {
         throw const MyExceptions();
       }
     } on FirebaseAuthException catch (e) {
+      log('Erro do FirebaseAuth: $e');
       final ex = MyExceptions.fromCode(e.code);
       throw ex.message;
     } catch (e) {
@@ -144,6 +146,7 @@ class AuthenticationRepository extends GetxController {
       final ex = MyExceptions.fromCode(e.code);
       throw ex.message;
     } catch (e) {
+      log('Erro no Auth Repo: $e');
       const ex = MyExceptions();
       throw ex.message;
     }
@@ -185,7 +188,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-/// [PhoneAuthentication] - LOGIN
+  /// [PhoneAuthentication] - LOGIN
   /*loginWithPhoneNo(String phoneNumber) async {
     try {
       await _auth.signInWithPhoneNumber(phoneNumber);
