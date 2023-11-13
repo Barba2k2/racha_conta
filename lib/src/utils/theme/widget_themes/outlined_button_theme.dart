@@ -13,7 +13,7 @@ class MyOutlinedButtonTheme {
       foregroundColor: tSecondaryColor,
       side: const BorderSide(color: tSecondaryColor),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(tBorderRadius),
+        borderRadius: BorderRadius.circular(10),
       ),
     ),
   );
@@ -24,7 +24,7 @@ class MyOutlinedButtonTheme {
       foregroundColor: tSecondaryColor,
       side: const BorderSide(color: tSecondaryColor),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(tBorderRadius),
+        borderRadius: BorderRadius.circular(10),
       ),
     ),
   );
