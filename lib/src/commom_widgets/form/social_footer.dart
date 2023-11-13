@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-import '../../Constants/colors.dart';
-import '../../Constants/image_strings.dart';
-import '../../Constants/text_strings.dart';
-import '../../Features/Authentication/Controllers/login_controller.dart';
-import '../Buttons/clickable_richtext_widget.dart';
-import '../Buttons/social_button.dart';
+import '../../constants/colors.dart';
+import '../../constants/image_strings.dart';
+import '../../constants/text_strings.dart';
+import '../../features/authentication/controllers/login_controller.dart';
+import '../buttons/clickable_richtext_widget.dart';
+import '../buttons/social_button.dart';
+
 
 // Widget que representa o rodapé contendo os botões de login social e um texto clicável.
 class SocialFooter extends StatelessWidget {
