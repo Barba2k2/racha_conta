@@ -108,6 +108,20 @@ class UserRepository extends GetxController {
     }
   }
 
+  Future<void> deleteUser(String id) async {
+    try {
+      await _db.collection("Users").doc(id).delete();
+    } on FirebaseAuthException catch (e) {
+      final result = MyExceptions.fromCode(e.code);
+      throw result.message;
+    } on FirebaseException catch (e) {
+      throw e.message.toString();
+    } catch (e) {
+      log('Erro ao apagar o usuário: $e');
+      throw 'Algo deu errado. Por favor, tente novamente';
+    }
+  }
+
   Future<UserModel> getUserDetailsById(String uid) async {
     try {
       final snapshot = await _db.collection("Users").doc(uid).get();
