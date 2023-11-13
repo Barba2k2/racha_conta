@@ -9,7 +9,7 @@ class MyTextTheme {
   /* -- Light Text Theme -- */
   static TextTheme lightTextTheme = TextTheme(
     displayLarge: GoogleFonts.nunito(
-      fontSize: 28.0,
+      fontSize: 30.0,
       fontWeight: FontWeight.bold,
       color: tDarkColor,
     ),
@@ -35,12 +35,12 @@ class MyTextTheme {
     ),
     headlineSmall: GoogleFonts.nunito(
       fontSize: 18.0,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w500,
       color: tDarkColor,
     ),
     bodyLarge: GoogleFonts.nunito(
       fontSize: 16,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.bold,
       color: tDarkColor,
     ),
     bodyMedium: GoogleFonts.nunito(
@@ -62,7 +62,7 @@ class MyTextTheme {
   /* -- Dark Text Theme -- */
   static TextTheme darkTextTheme = TextTheme(
     displayLarge: GoogleFonts.nunito(
-      fontSize: 28.0,
+      fontSize: 30.0,
       fontWeight: FontWeight.bold,
       color: tWhiteColor,
     ),
@@ -88,12 +88,12 @@ class MyTextTheme {
     ),
     headlineSmall: GoogleFonts.nunito(
       fontSize: 18.0,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w500,
       color: tWhiteColor,
     ),
     bodyLarge: GoogleFonts.nunito(
       fontSize: 16,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.bold,
       color: subtitleColor,
     ),
     bodyMedium: GoogleFonts.nunito(
