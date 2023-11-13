@@ -7,6 +7,9 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../expenses/expenses_page/expenses.dart';
+import '../../features/authentication/models/user_model.dart';
+import '../../features/authentication/screens/update_or_register/update_or_register_screen.dart';
+import '../../utils/helper/helper_controller.dart';
 import 'exceptions/exceptions.dart';
 import 'result/login_result.dart';
 
@@ -179,6 +182,129 @@ class AuthenticationRepository extends GetxController {
     } catch (e) {
       log('Erro ao deslogar usuário: $e');
       throw 'Não foi possível sair. Tente novamente mais tarde';
+    }
+  }
+
+/// [PhoneAuthentication] - LOGIN
+  /*loginWithPhoneNo(String phoneNumber) async {
+    try {
+      await _auth.signInWithPhoneNumber(phoneNumber);
+    } on FirebaseAuthException catch (e) {
+      final ex = MyExceptions.fromCode(e.code);
+      throw ex.message;
+    } catch (e) {
+      throw e.toString().isEmpty
+          ? 'Um erro desconhecido ocorreu. Tente novamente!'
+          : e.toString();
+    }
+  }*/
+
+  /// [PhoneAuthentication] - REGISTRO
+  Future<void> phoneAuthentication(String phoneNo) async {
+    try {
+      //Verifica se o número de telefone ja está associado a uma conta.
+      final isRegistered = await isPhoneNumberRegistered(phoneNo);
+      log('Está registrado: $isRegistered');
+
+      if (isRegistered) {
+        await _auth.verifyPhoneNumber(
+          phoneNumber: phoneNo,
+          verificationCompleted: (credential) async {
+            await _auth.signInWithCredential(credential);
+          },
+          codeSent: (verificationId, resendToken) {
+            phoneVerificationId.value = verificationId;
+          },
+          codeAutoRetrievalTimeout: (verificationId) {
+            phoneVerificationId.value = verificationId;
+          },
+          verificationFailed: (e) {
+            log('Erro de verificação: $e');
+            final result = MyExceptions.fromCode(e.code);
+            throw result.message;
+          },
+        );
+      } else {
+        /// Se não estiver associado, exibe uma tela informando ao usuário
+        /// para atualizar os dados ou criar uma conta.
+        Get.to(() => const UpdateOrRegisterScreen());
+      }
+    } on FirebaseAuthException catch (e) {
+      log('Erro do Firebase Auth Execeptions: $e');
+      final result = MyExceptions.fromCode(e.code);
+      throw result.message;
+    } catch (e) {
+      log('Erro: $e');
+      throw e.toString().isEmpty
+          ? 'Um erro desconhecido ocorreu. Tente novamente!'
+          : e.toString();
+    }
+  }
+
+  Future<bool> isPhoneNumberRegistered(String phoneNo) async {
+    try {
+      // Buscar o número de telefone na coleção 'Users'
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('Users')
+          .where('Numero de Telefone', isEqualTo: phoneNo)
+          .get();
+
+      // Se encontrarmos algum documento com esse número de telefone, retornamos verdadeiro
+      if (querySnapshot.docs.isNotEmpty) {
+        final UserModel user = UserModel.fromSnapshot(querySnapshot.docs.first);
+        // Aqui você pode logar ou fazer qualquer coisa com o usuário, se necessário.
+        log('User Found: ${user.phoneNo}');
+        return true;
+      }
+
+      return false;
+    } on FirebaseException catch (e) {
+      log('Erro da Firestore: $e');
+      throw 'Erro da Firestore: $e';
+    } catch (e) {
+      log("Erro ao verificar o número de telefone: $e");
+      return false;
+    }
+  }
+
+  /// [PhoneAuthentication] - VERIFICA O NUMERO DE TELEFONE VIA OTP
+  Future<bool> verifyOTP(String otp) async {
+    var credentials = await _auth.signInWithCredential(
+      PhoneAuthProvider.credential(
+        verificationId: phoneVerificationId.value,
+        smsCode: otp,
+      ),
+    );
+    return credentials.user != null ? true : false;
+  }
+
+  /// Updates the user's password
+  Future<void> resetPasswordWithOTP(
+    String newPassword,
+    String confirmPassword,
+  ) async {
+    try {
+      // Validação das senhas
+      if (newPassword != confirmPassword) {
+        throw const MyExceptions('As senhas não coincidem.');
+      }
+      if (newPassword.length < 8) {
+        Helper.validatePassword(newPassword);
+      }
+
+      // Atualizar a senha
+      if (_firebaseUser.value != null) {
+        await _firebaseUser.value!.updatePassword(newPassword);
+      } else {
+        throw const MyExceptions('Erro ao atualizar a senha.');
+      }
+    } on FirebaseAuthException catch (e) {
+      log('Erro do FirebaseAuthException: $e');
+      final ex = MyExceptions.fromCode(e.code);
+      throw ex.message;
+    } catch (e) {
+      log('Erro na redefinição de senha: $e');
+      throw e.toString();
     }
   }
 }
