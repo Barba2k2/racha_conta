@@ -72,22 +72,22 @@ class SignUpFormWidget extends StatelessWidget {
                   prefixIcon: Icon(LineAwesomeIcons.phone),
                 ),
               ),
-              const Gap(10),
-              // Campo para o CPF do usuário
-              TextFormField(
-                controller: controller.cpf,
-                validator: (value) => value!.isEmpty
-                    ? 'O campo CPF não pode ficar vazio'
-                    : GetUtils.isCpf(controller.cpf.text.trim())
-                        ? null
-                        : 'O CPF informado é invalido',
-                inputFormatters: [cpfFormatter],
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  label: Text(tCpf),
-                  prefixIcon: Icon(CupertinoIcons.number),
-                ),
-              ),
+              // const Gap(10),
+              // // Campo para o CPF do usuário
+              // TextFormField(
+              //   controller: controller.cpf,
+              //   validator: (value) => value!.isEmpty
+              //       ? 'O campo CPF não pode ficar vazio'
+              //       : GetUtils.isCpf(controller.cpf.text.trim())
+              //           ? null
+              //           : 'O CPF informado é invalido',
+              //   inputFormatters: [cpfFormatter],
+              //   keyboardType: TextInputType.number,
+              //   decoration: const InputDecoration(
+              //     label: Text(tCpf),
+              //     prefixIcon: Icon(CupertinoIcons.number),
+              //   ),
+              // ),
               const Gap(10),
               // Campo para a senha do usuário
               Obx(
@@ -125,8 +125,7 @@ class SignUpFormWidget extends StatelessWidget {
                   // Indica se o botão deve mostrar um indicador de carregamento.
                   isLoading: controller.isLoading.value,
                   text: "Cadastrar",
-                  onPressed: controller.isFacebookLoading.value ||
-                          controller.isGoogleLoading.value
+                  onPressed: controller.isGoogleLoading.value
                       ? () {}
                       : controller.isLoading.value
                           ? () {}
