@@ -5,9 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:racha_conta/src/utils/helper/helper_controller.dart';
 
 import '../../models/expense_model.dart';
+import '../../utils/helper/helper_controller.dart';
 
 class ExpenseController extends GetxController {
   // Inicializações das instâncias do Firebase
