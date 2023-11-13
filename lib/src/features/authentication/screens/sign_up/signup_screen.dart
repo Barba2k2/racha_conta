@@ -56,6 +56,7 @@ class SignupScreen extends StatelessWidget {
                   const FormHeaderWidget(
                     image: moneyLogoPng,
                     title: tSignUpTitle,
+                    heightBetween: 10,
                     subTitle: tSignUpSubTitle,
                     imageHeight: 0.1,
                   ),
