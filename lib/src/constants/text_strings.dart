@@ -36,14 +36,15 @@ const String tWelcomeTitle =
     "Bem vindo ao aplicativo\nSafe City, entre ou \ncadastre-se e ajude \na sua cidade.";
 
 //* -- Sing Up Screen Text
-const String tSignUpTitle = "Junte-se a nós e faça a diferença na sua cidade.";
+const String tSignUpTitle =
+    "Olá, jovem rolezero, cadastre-se e divida suas contas com a gelera.";
 const String tSignUpSubTitle = "Cadastre-se agora!";
 const String tAlreadyHaveAnAccount = 'Já possui uma conta? ';
 
 //* -- Login Screen Texts
-const String tLoginTitle = "Bem-Vindo de volta,";
+const String tLoginTitle = "Você voltou,";
 const String tLoginSubTitle =
-    "Continue contribuindo com \na segurança da sua comunidade.";
+    "Entre e divida sua contas com a sua galera.";
 const String tRememberMe = "Lembrar-me?";
 const String tDontHaveAnAccount = "Ainda não possui uma conta? ";
 const String tResetPassword = "Mudar senha";
@@ -138,7 +139,9 @@ const String deleteAccount = 'Apagar Conta';
 
 //# -- Add Expense Screen --
 const String errorMessage = 'Dados INválidos';
-const String verifyData = 'Por favor, verifique se inseriu um titulo, valor, data e categoria corretamente.';
+const String verifyData =
+    'Por favor, verifique se inseriu um titulo, valor, data e categoria corretamente.';
 
 //$ Expenses Screen
-const String emptyExpenses = 'Nenhuma conta encontrada. Começe a monitorar seus gastos com a sua galera!';
+const String emptyExpenses =
+    'Nenhuma conta encontrada. Começe a monitorar seus gastos com a sua galera!';
