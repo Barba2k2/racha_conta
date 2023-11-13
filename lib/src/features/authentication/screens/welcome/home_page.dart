@@ -1,4 +1,3 @@
-// Importações necessárias para o funcionamento da tela.
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -12,7 +11,7 @@ import '../sign_up/signup_screen.dart';
 
 // Definição da tela de boas-vindas.
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key});
+  const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
@@ -42,55 +41,44 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           backgroundColor: isDark ? tDarkColor : tWhiteColor,
           body: Column(
             children: [
+              const Gap(100),
               // Imagem de boas-vindas.
-              SizedBox(
+              const SizedBox(
                 height: 300,
                 child: Image(
-                  image: const AssetImage(moneyLogoPng),
-                  width: width,
-                  height: height,
+                  image: AssetImage(moneyLogoPng),
+                  width: 300,
+                  height: 300,
                   fit: BoxFit.cover,
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     // Centraliza os elementos na tela.
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Column(
-                        children: [
-                          // Texto de boas-vindas.
-                          Text(
-                            tWelcomeTitle,
-                            style: Theme.of(context).textTheme.displayLarge,
-                          ),
-                        ],
+                      // Botão de login.
+                      SizedBox(
+                        height: 60,
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          onPressed: () => Get.to(const LoginScreen()),
+                          child: Text(tLogin.toUpperCase()),
+                        ),
                       ),
-                      const Gap(50),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Botão de login.
-                          Expanded(
-                            child: OutlinedButton(
-                              onPressed: () =>
-                                  Get.to(() => const LoginScreen()),
-                              child: Text(tLogin.toUpperCase()),
-                            ),
-                          ),
-                          const Gap(20),
-                          // Botão de inscrição.
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: () =>
-                                  Get.to(() => const SignupScreen()),
-                              child: Text(tSignup.toUpperCase()),
-                            ),
-                          ),
-                        ],
+                      const Gap(10),
+                      // Botão de inscrição.
+                      SizedBox(
+                        height: 60,
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () => Get.to(const SignupScreen()),
+                          child: Text(tSignup.toUpperCase()),
+                        ),
                       ),
+                      const Gap(20),
                     ],
                   ),
                 ),
