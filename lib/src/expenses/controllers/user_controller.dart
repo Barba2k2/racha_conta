@@ -43,13 +43,16 @@ class UserController extends GetxController {
       }
       return null;
     } on FirebaseAuthException catch (e) {
+      log('Erro do FirebaseAuth: $e');
       // Trata exceções específicas do FirebaseAuth.
       final result = MyExceptions.fromCode(e.code);
       throw result.message;
     } on FirebaseException catch (e) {
+      log('Erro do Firebase: $e');
       // Trata exceções gerais do Firebase.
       throw e.message.toString();
     } catch (e) {
+      log('Erro do getUserDetailsById: $e');
       // Trata exceções genéricas e retorna uma mensagem de erro.
       throw e.toString().isEmpty
           ? 'Something went wrong. Please Try Again'
