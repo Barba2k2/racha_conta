@@ -41,7 +41,7 @@ class LoginController extends GetxController {
       // Se o login falhar, mostra uma snackbar de erro
       if (!loginResult.success) {
         Helper.errorSnackBar(
-          title: 'Opa',
+          title: 'Poxa',
           message: loginResult.errorMessage!,
         );
         isLoading.value = false;
@@ -52,7 +52,7 @@ class LoginController extends GetxController {
     } catch (e) {
       isLoading.value = false;
       Helper.errorSnackBar(
-        title: 'Opa',
+        title: 'Poxa',
         message: e.toString(),
       );
     }
@@ -82,7 +82,7 @@ class LoginController extends GetxController {
       }
     } catch (e) {
       isGoogleLoading.value = false;
-      Helper.errorSnackBar(title: 'Opa', message: e.toString());
+      Helper.errorSnackBar(title: 'Poxa', message: e.toString());
     }
   }
 

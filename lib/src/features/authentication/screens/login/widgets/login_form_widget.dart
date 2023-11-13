@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:racha_conta/src/constants/colors.dart';
 
 import '../../../../../constants/text_strings.dart';
 import '../../../../../utils/Helper/helper_controller.dart';
@@ -70,15 +71,18 @@ class LoginFormWidget extends StatelessWidget {
             ),
             const Gap(10),
 
-            // ...
-
             Align(
               alignment: Alignment.centerRight,
               // Botão que abre o modal de "esqueci minha senha".
               child: TextButton(
                 onPressed: () =>
                     ForgetPasswordScreen.buildShowModalBottomSheet(context),
-                child: const Text(tForgetPassword),
+                child: Text(
+                  tForgetPassword,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: tFacebookBgColor,
+                      ),
+                ),
               ),
             ),
 
