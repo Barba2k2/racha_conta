@@ -24,6 +24,8 @@ dependencies:
   flutter_native_splash: ^2.3.5
   line_awesome_flutter: ^2.0.0
   google_fonts: ^6.1.0
+  flutter_otp_text_field: ^1.1.1
+  mask_text_input_formatter: ^2.5.0
 
 dev_dependencies:
   flutter_test:
