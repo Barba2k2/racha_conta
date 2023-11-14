@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 // import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-// import 'package:racha_conta/src/constants/colors.dart';
-import 'package:racha_conta/src/features/authentication/models/user_model.dart';
 
-// import '../../controllers/theme_controller/theme_controller.dart';
 import '../../constants/colors.dart';
+// import '../../controllers/theme_controller/theme_controller.dart';
+import '../../features/authentication/models/user_model.dart';
 import '../../models/expense_model.dart';
 import '../controllers/user_controller.dart';
 import '../expense_details/expense_details.dart';
@@ -54,29 +54,39 @@ class _ExpenseCardState extends State<ExpenseCard> {
                               Icon(
                                 categoryIcons[widget.expenseModel!.category],
                                 size: 24,
+                                color: blackColor,
                               ),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
                                   widget.expenseModel!.title,
-                                  style:
-                                      Theme.of(context).textTheme.headlineLarge,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge!
+                                      .copyWith(color: blackColor),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ],
                           ),
                         ),
+                        const Gap(5),
                         Expanded(
                           child: Text(
                             'R\$ ${widget.expenseModel!.ammount.toString()}',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(color: blackColor),
                           ),
                         ),
                         Expanded(
                           child: Text(
                             widget.expenseModel!.description,
-                            style: Theme.of(context).textTheme.bodyLarge,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(color: blackColor),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
