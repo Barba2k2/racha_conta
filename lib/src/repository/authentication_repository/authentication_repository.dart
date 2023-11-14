@@ -6,9 +6,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../expenses/expenses_page/expenses.dart';
 import '../../features/authentication/models/user_model.dart';
 import '../../features/authentication/screens/update_or_register/update_or_register_screen.dart';
+import '../../features/core/nav_bar/navigation_bar.dart';
 import '../../utils/helper/helper_controller.dart';
 import 'exceptions/exceptions.dart';
 import 'result/login_result.dart';
@@ -137,7 +137,7 @@ class AuthenticationRepository extends GetxController {
           await FirebaseAuth.instance.signInWithCredential(credential);
 
       // Redirecionar para Expanses após o login bem sucedido
-      Get.to(() => const Expenses());
+      Get.to(() => const MyNavigationBar());
 
       // Uma vez conectado, retorne o UserCredential
       return userCredential;

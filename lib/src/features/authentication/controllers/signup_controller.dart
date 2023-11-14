@@ -5,8 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../expenses/expenses_page/expenses.dart';
 import '../../../repository/authentication_repository/authentication_repository.dart';
+import '../../core/nav_bar/navigation_bar.dart';
 
 class SignUpController extends GetxController {
   // Obtêm uma instancia do SignUpController
@@ -79,7 +79,7 @@ class SignUpController extends GetxController {
         auth.setInitialScreen(auth.firebaseUser);
 
         // Navega até a tela principal
-        Get.to(() => const Expenses());
+        Get.to(() => const MyNavigationBar());
       }
     } catch (e) {
       // Interrompe o carregamento e mostra o erro
