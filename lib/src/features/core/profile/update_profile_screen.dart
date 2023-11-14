@@ -4,13 +4,13 @@ import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+import '../../../constants/colors.dart';
 import '../../../constants/text_strings.dart';
+import '../../../controllers/theme_controller/theme_controller.dart';
 import '../../authentication/controllers/profile_controller.dart';
 import '../../authentication/models/user_model.dart';
 import 'profile_form.dart';
 import 'widgets/image_with_icon.dart';
-
-
 
 class UpdateProfileScreen extends StatelessWidget {
   UpdateProfileScreen({Key? key}) : super(key: key);
@@ -29,6 +29,8 @@ class UpdateProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find();
+    final isDark = themeController.isDarkMode.value;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -42,6 +44,7 @@ class UpdateProfileScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
+          color: isDark ? darkNavBar : const Color(0xFFF5F5F5),
           padding: const EdgeInsets.all(20),
 
           /// -- Future Builder para carregar os dados do usuário

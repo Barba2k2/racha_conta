@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:racha_conta/src/constants/colors.dart';
 
 import '../../../commom_widgets/buttons/primary_button.dart';
 import '../../../constants/text_strings.dart';
@@ -16,8 +17,6 @@ import '../../authentication/screens/welcome/home_page.dart';
 import 'update_profile_screen.dart';
 import 'widgets/image_with_icon.dart';
 import 'widgets/profile_menu.dart';
-
-
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -74,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
             bool shouldExit = await showExitDialog(context);
             shouldExit ? SystemNavigator.pop() : null;
             // Previne a ação padrão do botão de voltar
-            return false; 
+            return false;
           },
           child: Scaffold(
             appBar: AppBar(
@@ -98,6 +97,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Container(
+                color: isDark ? darkNavBar : const Color(0xFFF5F5F5),
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
