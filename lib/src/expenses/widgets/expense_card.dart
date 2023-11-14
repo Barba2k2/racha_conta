@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
 // import '../../controllers/theme_controller/theme_controller.dart';
+import '../../controllers/theme_controller/theme_controller.dart';
 import '../../features/authentication/models/user_model.dart';
 import '../../models/expense_model.dart';
 import '../controllers/user_controller.dart';
@@ -23,8 +24,8 @@ class _ExpenseCardState extends State<ExpenseCard> {
   Widget build(BuildContext context) {
     final UserController userController = Get.find();
 
-    // final ThemeController themeController = Get.find();
-    // final isDark = themeController.isDarkMode.value;
+    final ThemeController themeController = Get.find();
+    final isDark = themeController.isDarkMode.value;
 
     return StreamBuilder<UserModel?>(
       stream: userController.userStream,
@@ -38,7 +39,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
             height: 100,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: expenseColorBg,
+              color: isDark ? expenseColorDarkBg : expenseColorLightBg,
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -54,7 +55,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                               Icon(
                                 categoryIcons[widget.expenseModel!.category],
                                 size: 24,
-                                color: blackColor,
+                                color: isDark ? white98 : blackColor,
                               ),
                               const SizedBox(width: 8),
                               Expanded(
@@ -63,7 +64,9 @@ class _ExpenseCardState extends State<ExpenseCard> {
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineLarge!
-                                      .copyWith(color: blackColor),
+                                      .copyWith(
+                                        color: isDark ? white98 : blackColor,
+                                      ),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
@@ -74,19 +77,19 @@ class _ExpenseCardState extends State<ExpenseCard> {
                         Expanded(
                           child: Text(
                             'R\$ ${widget.expenseModel!.ammount.toString()}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(color: blackColor),
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      color: isDark ? white98 : blackColor,
+                                    ),
                           ),
                         ),
                         Expanded(
                           child: Text(
                             widget.expenseModel!.description,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(color: blackColor),
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      color: isDark ? white98 : blackColor,
+                                    ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
