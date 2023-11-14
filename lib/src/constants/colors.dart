@@ -12,12 +12,14 @@ const tSecondaryColor = Color(0xFF9923E3);
 const registerTextButtonColor = Color(0xFF0BEF82);
 
 const tDarkCard = Color.fromARGB(255, 74, 74, 74);
+const tLightCard = Color.fromARGB(255, 231, 231, 231);
 const white70 = Colors.white70;
+var white98 = Colors.white.withOpacity(.98);
 
 //* -- BOTTOM NAVIGATION BAR
 const darkNavBar = Color(0xFF2F2F2F);
-const whiteNavBar = Color(0xFFD8D8D8);
-const whiteBgNavBar = Color(0xFFF3F3F3);
+const whiteNavBar = Color(0xFFF5F5F5);
+const whiteBgNavBar = Color(0xFFF5F5F5);
 
 //* -- SNACKBAR COLORS
 const tSuccessSnackbar = Colors.green;
@@ -44,4 +46,5 @@ const whiteContainer = Color(0xFFE0E0E0);
 const blackContainer = Color(0xFF424242);
 
 //* -- EXPENSE COLOR BG
-const expenseColorBg = Color(0xFFD9D9D9);
+const expenseColorLightBg = Color(0xFFD9D9D9);
+const expenseColorDarkBg = Color(0xFF707070);
