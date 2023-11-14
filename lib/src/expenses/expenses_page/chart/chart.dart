@@ -69,7 +69,7 @@ class Chart extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: Icon(
                         categoryIcons[bucket.category],
-                        color: tGoogleForegroundColor,
+                        color: const Color(0xFF004088),
                       ),
                     ),
                   ),
