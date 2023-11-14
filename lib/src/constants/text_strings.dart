@@ -130,9 +130,6 @@ const String menu2 = 'Gerenciamento de Usuários';
 const String menu3 = 'Informações';
 const String menu4 = 'Sair';
 
-//* -- Pagina Perfil --
-const String delete = 'Apagar';
-
 //* -- Pagina Atualizar Perfil --
 const String updateProfile = 'Atualizar Perfil';
 const String deleteAccount = 'Apagar Conta';
