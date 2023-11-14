@@ -8,7 +8,6 @@ import '../../../constants/text_strings.dart';
 import '../../authentication/controllers/profile_controller.dart';
 import '../../authentication/models/user_model.dart';
 
-
 class ProfileFormScreen extends StatelessWidget {
   ProfileFormScreen({
     Key? key,
@@ -81,6 +80,7 @@ class ProfileFormScreen extends StatelessWidget {
 
           /// -- Form Submit Button
           SizedBox(
+            height: 60,
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () async {
@@ -93,7 +93,13 @@ class ProfileFormScreen extends StatelessWidget {
 
                 await controller.updateRecord(userData);
               },
-              child: const Text(editProfile),
+              child: Text(
+                editProfile,
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.7,
+                    ),
+              ),
             ),
           ),
           const Gap(30),
@@ -102,15 +108,25 @@ class ProfileFormScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent.withOpacity(0.1),
-                  elevation: 0,
-                  foregroundColor: Colors.red,
-                  side: BorderSide.none,
+              SizedBox(
+                width: 150,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.redAccent.withOpacity(0.1),
+                    elevation: 0,
+                    foregroundColor: Colors.red,
+                    side: BorderSide.none,
+                  ),
+                  child: Text(
+                    deleteAccount,
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                  ),
                 ),
-                child: const Text(delete),
               ),
             ],
           )
