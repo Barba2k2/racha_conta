@@ -9,15 +9,15 @@ import 'chart/chart.dart';
 import 'expanses_list/expenses_list.dart';
 import '../new_expense/new_expense.dart';
 
-class Expenses extends StatefulWidget {
-  const Expenses({Key? key, this.expenseModel}) : super(key: key);
+class ExpensesScreen extends StatefulWidget {
+  const ExpensesScreen({Key? key, this.expenseModel}) : super(key: key);
   final ExpenseModel? expenseModel;
 
   @override
-  State<Expenses> createState() => _ExpensesState();
+  State<ExpensesScreen> createState() => _ExpensesScreenState();
 }
 
-class _ExpensesState extends State<Expenses> {
+class _ExpensesScreenState extends State<ExpensesScreen> {
   final List<ExpenseModel> _registeredExpenses = [
     ExpenseModel(
       title: 'Jetete',
@@ -101,10 +101,14 @@ class _ExpensesState extends State<Expenses> {
         title: Text(
           'Racha Conta',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.displayLarge,
+          style: Theme.of(context)
+              .textTheme
+              .displayLarge!
+              .copyWith(color: whiteColor),
         ),
         centerTitle: true,
         backgroundColor: tPrimaryColor,
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             onPressed: _openAddExpanseOverlay,
