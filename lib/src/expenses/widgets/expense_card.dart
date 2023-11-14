@@ -96,7 +96,10 @@ class _ExpenseCardState extends State<ExpenseCard> {
                           },
                           child: Text(
                             'Detalhes',
-                            style: Theme.of(context).textTheme.headlineMedium,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(color: whiteColor),
                           ),
                         ),
                       ),
@@ -108,7 +111,10 @@ class _ExpenseCardState extends State<ExpenseCard> {
                           onPressed: () {},
                           child: Text(
                             'Editar',
-                            style: Theme.of(context).textTheme.headlineMedium,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(color: whiteColor),
                           ),
                         ),
                       ),
