@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:racha_conta/src/constants/colors.dart';
+
+import '../../../controllers/theme_controller/theme_controller.dart';
 
 class ChartBar extends StatelessWidget {
   const ChartBar({super.key, required this.fill});
@@ -7,18 +11,20 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find();
+    final isDark = themeController.isDarkMode.value;
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6),
         child: FractionallySizedBox(
           heightFactor: fill,
-          child: const DecoratedBox(
+          child: DecoratedBox(
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.vertical(
+              borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(10),
               ),
-              color: Color(0Xff00C853),
+              color: isDark ? white98 : Colors.black.withOpacity(0.8),
             ),
           ),
         ),

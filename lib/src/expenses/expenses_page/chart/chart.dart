@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:racha_conta/src/models/expense_model.dart';
 
 import '../../../constants/colors.dart';
+import '../../../controllers/theme_controller/theme_controller.dart';
 import 'chart_bar.dart';
 
 class Chart extends StatelessWidget {
@@ -36,14 +38,17 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find();
+    final isDark = themeController.isDarkMode.value;
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
       width: double.infinity,
       height: 180,
+      // color: isDark ? tDarkCard : tLightCard,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: expenseColorBg,
+        color: isDark ? expenseColorDarkBg : expenseColorLightBg,
       ),
       child: Column(
         children: [
@@ -69,7 +74,7 @@ class Chart extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: Icon(
                         categoryIcons[bucket.category],
-                        color: const Color(0xFF004088),
+                        color: isDark ? white98 : Colors.black.withOpacity(.75),
                       ),
                     ),
                   ),

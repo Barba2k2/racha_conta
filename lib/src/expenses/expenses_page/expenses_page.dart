@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text_strings.dart';
+import '../../controllers/theme_controller/theme_controller.dart';
 import '../../models/expense_model.dart';
 import 'chart/chart.dart';
 import 'expanses_list/expenses_list.dart';
@@ -82,6 +84,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find();
+    final isDark = themeController.isDarkMode.value;
     Widget mainContent = const Center(
       child: Padding(
         padding: EdgeInsets.all(16),
@@ -119,14 +123,17 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-            child: mainContent,
-          ),
-        ],
+      body: Container(
+        color: isDark ? darkNavBar : Color(0xFFF5F5F5),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Chart(expenses: _registeredExpenses),
+            Expanded(
+              child: mainContent,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:racha_conta/src/constants/colors.dart';
 
+import '../../../controllers/theme_controller/theme_controller.dart';
 import '../../../models/expense_model.dart';
 import '../../widgets/expense_card.dart';
 
@@ -15,6 +18,8 @@ class ExpenseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find();
+    final isDark = themeController.isDarkMode.value;
     return ListView.builder(
       itemCount: expenses.length,
       itemBuilder: (ctx, index) => Dismissible(
@@ -22,7 +27,7 @@ class ExpenseList extends StatelessWidget {
         direction: DismissDirection.endToStart,
         background: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.error.withOpacity(.75),
+            color: isDark ? tDarkCard : tLightCard,
             borderRadius: BorderRadius.circular(20),
           ),
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
