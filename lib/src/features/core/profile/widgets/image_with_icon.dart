@@ -18,7 +18,9 @@ class ImageWithIcon extends StatelessWidget {
           height: 120,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(100),
-            child: const Image(image: AssetImage(avatarImage)),
+            child: const Image(
+              image: AssetImage(avatarImage),
+            ),
           ),
         ),
         Positioned(
@@ -31,9 +33,9 @@ class ImageWithIcon extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
               color: tPrimaryColor,
             ),
-            child: const Icon(
+            child: Icon(
               LineAwesomeIcons.alternate_pencil,
-              color: Colors.black,
+              color: Colors.white.withOpacity(0.8),
               size: 20,
             ),
           ),
