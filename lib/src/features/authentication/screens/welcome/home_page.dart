@@ -20,10 +20,6 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    // Obtém as "medidas" da tela.
-    var mediaQuery = MediaQuery.of(context);
-    var width = mediaQuery.size.width;
-    var height = mediaQuery.size.height;
 
     // Obtém o controle do tema para verificar se está no modo escuro.
     final ThemeController themeController = Get.find();
