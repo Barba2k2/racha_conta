@@ -44,6 +44,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                 selectedItemColor: isDark ? whiteColor : blackColor,
                 unselectedItemColor: isDark ? white60 : greyShade600,
                 currentIndex: controller.tabIndex,
+                elevation: 0,
                 onTap: (index) {
                   setState(() {
                     controller.tabIndex = index;
@@ -52,7 +53,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                 items: [
                   BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.table_chart_rounded,
+                      Icons.wallet_rounded,
                       color: isDark ? whiteColor : blackColor,
                     ),
                     label: selectedIndex == 0 ? "Minhas Depesas" : "",
@@ -61,7 +62,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                   BottomNavigationBarItem(
                     icon: Icon(
                       LineIcons.user,
-                      color: isDark ? whiteColor : Colors.black,
+                      color: isDark ? whiteColor : blackColor,
                     ),
                     label: selectedIndex == 1 ? "Perfil" : "",
                     backgroundColor: isDark ? darkNavBar : whiteBgNavBar,
