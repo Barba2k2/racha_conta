@@ -18,7 +18,7 @@ class SignUpController extends GetxController {
   // Observáveis para controlar a visibilidade da senha e o status de carregamento do Google e Facebook.
   final showPassword = false.obs;
   final isGoogleLoading = false.obs;
-  final isFacebookLoading = false.obs;
+  // final isFacebookLoading = false.obs;
 
   // Chave para acessar e validar o formulário de registro.
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
@@ -36,7 +36,6 @@ class SignUpController extends GetxController {
 
   //* Observáveis para controlar o status de carregamento e se o usuário é um administrador.
   final isLoading = false.obs;
-  final isAdmin = false.obs;
 
   //@ Registra um novo usuário utilizando authenticação via [EmailAndPassword]
   Future<void> createUser(String email) async {
