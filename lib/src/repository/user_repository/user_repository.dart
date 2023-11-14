@@ -45,7 +45,7 @@ class UserRepository extends GetxController {
         DocumentReference docRef = _db.collection('Users').doc(user.id);
 
         // Adcionar o UserModel ao FireStore
-        await docRef.set({user.toJson()});
+        await docRef.set(user.toJson());
         log('Docuemnto do usuário pelo google: ${docRef.id}');
         return docRef.id;
       }
@@ -63,10 +63,12 @@ class UserRepository extends GetxController {
 
   Future<UserModel> getUserDetails(String email) async {
     try {
-      final snapshot = await _db.collection('Users').where('E-mail', isEqualTo: email).get();
-      if(snapshot.docs.isEmpty) throw 'Nunhum usuário encontrado';
+      final snapshot =
+          await _db.collection('Users').where('E-mail', isEqualTo: email).get();
+      if (snapshot.docs.isEmpty) throw 'Nunhum usuário encontrado';
 
-      final userData = snapshot.docs.map((e) => UserModel.fromSnapshot(e)).single;
+      final userData =
+          snapshot.docs.map((e) => UserModel.fromSnapshot(e)).single;
       return userData;
     } on FirebaseAuthException catch (e) {
       final result = MyExceptions.fromCode(e.code);
@@ -74,16 +76,22 @@ class UserRepository extends GetxController {
     } on FirebaseException catch (e) {
       throw e.message.toString();
     } catch (e) {
-      throw e.toString().isEmpty ? 'Algo deu errado. Por favor, tente novamente.' : e.toString();
+      throw e.toString().isEmpty
+          ? 'Algo deu errado. Por favor, tente novamente.'
+          : e.toString();
     }
   }
 
   Future<UserModel> getUserNameDetails(String name) async {
     try {
-      final snapshot = await _db.collection('Users').where('Nome Completo', isEqualTo: name).get();
-      if(snapshot.docs.isEmpty) throw 'Usuário não encontrado';
+      final snapshot = await _db
+          .collection('Users')
+          .where('Nome Completo', isEqualTo: name)
+          .get();
+      if (snapshot.docs.isEmpty) throw 'Usuário não encontrado';
 
-      final userData = snapshot.docs.map((e) => UserModel.fromSnapshot(e)).single;
+      final userData =
+          snapshot.docs.map((e) => UserModel.fromSnapshot(e)).single;
       return userData;
     } on FirebaseAuthException catch (e) {
       final result = MyExceptions.fromCode(e.code);
@@ -91,7 +99,9 @@ class UserRepository extends GetxController {
     } on FirebaseException catch (e) {
       throw e.message.toString();
     } catch (e) {
-      throw e.toString().isEmpty ? 'Algo deu errado. Por favor, tente novamente.' : e.toString();
+      throw e.toString().isEmpty
+          ? 'Algo deu errado. Por favor, tente novamente.'
+          : e.toString();
     }
   }
 
@@ -104,7 +114,9 @@ class UserRepository extends GetxController {
     } on FirebaseException catch (e) {
       throw e.message.toString();
     } catch (e) {
-      throw e.toString().isEmpty ? 'Algo deu errado. Por favor, tente novamente.' : e.toString();
+      throw e.toString().isEmpty
+          ? 'Algo deu errado. Por favor, tente novamente.'
+          : e.toString();
     }
   }
 
