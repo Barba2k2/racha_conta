@@ -39,6 +39,7 @@ class UserController extends GetxController {
 
         // Atualiza o valor de _user com os detalhes do usuário.
         _user.value = user;
+        log('Novo valor de _ser: $user');
         return user;
       }
       return null;
@@ -62,11 +63,14 @@ class UserController extends GetxController {
 
   /// Stream que observa as mudanças nos dados do usuário.
   Stream<UserModel?> get userStream {
-    return _db.collection("Users").doc().snapshots().map(
-          (snapshot) => snapshot.exists && snapshot.data() != null
-              ? UserModel.fromSnapshot(snapshot)
-              : null,
-        );
+    return _db.collection("Users").snapshots().map(
+      (querySnapshot) {
+        if (querySnapshot.docs.isNotEmpty) {
+          return UserModel.fromSnapshot(querySnapshot.docs.first);
+        }
+        return null;
+      },
+    );
   }
 
   // Função privada para carregar os dados do usuário atualmente autenticado.
@@ -77,7 +81,7 @@ class UserController extends GetxController {
 
       // Atualiza o valor de _user com os detalhes do usuário.
       _user.value = user;
-
+      log('Valores do usuário: $user');
       // Notifica os ouvintes sobre a atualização.
       update();
     } catch (e) {

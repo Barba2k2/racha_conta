@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -82,6 +84,7 @@ class LoginController extends GetxController {
       }
     } catch (e) {
       isGoogleLoading.value = false;
+      log('Erro de login com google: $e');
       Helper.errorSnackBar(title: 'Poxa', message: e.toString());
     }
   }
