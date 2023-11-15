@@ -14,7 +14,7 @@ const registerTextButtonColor = Color(0xFF0BEF82);
 const tDarkCard = Color.fromARGB(255, 74, 74, 74);
 const tLightCard = Color.fromARGB(255, 231, 231, 231);
 const white70 = Colors.white70;
-var white98 = Colors.white.withOpacity(.98);
+var white90 = Colors.white.withOpacity(.9);
 
 //* -- BOTTOM NAVIGATION BAR
 const darkNavBar = Color(0xFF2F2F2F);
@@ -31,6 +31,8 @@ const tWhiteColor = whiteColor;
 const tDarkColor = Color(0xff272727);
 const tCardBgColor = Color(0xFFF7F5F1);
 var subtitleColor = const Color.fromARGB(255, 220, 220, 220);
+const whiteBg = Color(0xFFF5F5F5);
+const darkBg = darkNavBar;
 
 //* -- SOCIAL Button COLORS
 const tGoogleBgColor = Color(0xFFDFEFFF);
