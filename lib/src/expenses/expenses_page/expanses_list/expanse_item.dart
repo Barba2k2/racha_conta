@@ -21,7 +21,7 @@ class ExpenseItem extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    expense.title,
+                    expense.title!,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(width: 8),
@@ -32,7 +32,7 @@ class ExpenseItem extends StatelessWidget {
               Row(
                 children: [
                   // Valor
-                  Text('R\$ ${expense.ammount.toStringAsFixed(2)}'),
+                  Text('R\$ ${expense.ammount!.toStringAsFixed(2)}'),
                   const Spacer(),
                   // Item da categoria + Data
                   Text(expense.formattedDate),
