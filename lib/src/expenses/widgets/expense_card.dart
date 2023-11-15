@@ -55,17 +55,37 @@ class _ExpenseCardState extends State<ExpenseCard> {
                               Icon(
                                 categoryIcons[widget.expenseModel!.category],
                                 size: 24,
-                                color: isDark ? white98 : blackColor,
+                                color: isDark ? white90 : blackColor,
                               ),
                               const SizedBox(width: 8),
+                              Text(
+                                widget.expenseModel!.title!,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(
+                                      color: isDark ? white90 : blackColor,
+                                    ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                ' - ',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(
+                                      color: isDark ? white90 : blackColor,
+                                    ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                               Expanded(
                                 child: Text(
-                                  widget.expenseModel!.title,
+                                  widget.expenseModel!.formattedDate,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .headlineLarge!
+                                      .headlineSmall!
                                       .copyWith(
-                                        color: isDark ? white98 : blackColor,
+                                        color: isDark ? white90 : blackColor,
                                       ),
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -79,16 +99,16 @@ class _ExpenseCardState extends State<ExpenseCard> {
                             'R\$ ${widget.expenseModel!.ammount.toString()}',
                             style:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      color: isDark ? white98 : blackColor,
+                                      color: isDark ? white90 : blackColor,
                                     ),
                           ),
                         ),
                         Expanded(
                           child: Text(
-                            widget.expenseModel!.description,
+                            widget.expenseModel!.description!,
                             style:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      color: isDark ? white98 : blackColor,
+                                      color: isDark ? white90 : blackColor,
                                     ),
                             overflow: TextOverflow.ellipsis,
                           ),
