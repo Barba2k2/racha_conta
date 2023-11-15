@@ -33,6 +33,7 @@ const tCardBgColor = Color(0xFFF7F5F1);
 var subtitleColor = const Color.fromARGB(255, 220, 220, 220);
 const whiteBg = Color(0xFFF5F5F5);
 const darkBg = darkNavBar;
+var black85 = Colors.black.withOpacity(0.85);
 
 //* -- SOCIAL Button COLORS
 const tGoogleBgColor = Color(0xFFDFEFFF);
