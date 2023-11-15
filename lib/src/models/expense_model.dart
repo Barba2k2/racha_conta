@@ -89,24 +89,24 @@ Category getCategoryFromString(String category) {
 
 class ExpenseModel {
   ExpenseModel({
-    required this.expenseId,
-    required this.userId,
-    required this.title,
-    required this.ammount,
-    required this.date,
-    required this.category,
-    required this.description,
+    this.expenseId,
+    this.userId,
+    this.title,
+    this.ammount,
+    this.date,
+    this.category,
+    this.description,
   });
 
-  final String expenseId;
-  final String userId;
-  final String title;
-  final double ammount;
-  final DateTime date;
-  final Category category;
-  final String description;
+  final String? expenseId;
+  final String? userId;
+  final String? title;
+  final double? ammount;
+  final DateTime? date;
+  final Category? category;
+  final String? description;
 
-  String get formattedDate => formatter.format(date);
+  String get formattedDate => formatter.format(date!);
 
   Map<String, dynamic> toMap() {
     return {
@@ -114,8 +114,8 @@ class ExpenseModel {
       'Id do Usuario': userId,
       'Titulo': title,
       'Valor': ammount,
-      'Data da Depsesa': Timestamp.fromDate(date),
-      'Categoria': category.categoryDescription,
+      'Data da Depsesa': Timestamp.fromDate(date!),
+      'Categoria': category!.categoryDescription,
       'Descricao': description,
     };
   }
@@ -284,7 +284,7 @@ class ExpenseBucket {
     for (final expense in expenses) {
       //* sum = sum + expense.amount
       //* mesma função, escrita de formas diferentes
-      sum += expense.ammount;
+      sum += expense.ammount!;
     }
 
     return sum;
