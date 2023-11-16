@@ -6,8 +6,8 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:get/get.dart';
 import 'package:racha_conta/src/app.dart';
 
-import 'firebase_options.dart';
-import 'repository/authentication_repository/authentication_repository.dart';
+import 'src/firebase_options.dart';
+import 'src/repository/authentication_repository/authentication_repository.dart';
 
 Future<void> main() async {
   // Garante a inicialização do binding de widgets do Flutter
