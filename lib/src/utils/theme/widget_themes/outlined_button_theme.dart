@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../Constants/colors.dart';
-import '../../../Constants/sizes.dart';
+import '../../../constants/colors.dart';
 
 /* -- Light & Dark Outlined Button Themes -- */
 class MyOutlinedButtonTheme {
