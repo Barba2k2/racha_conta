@@ -45,9 +45,9 @@ class ExpenseController extends GetxController {
     String description,
   ) async {
     try {
-      String? userName = await getUserName(user!.uid);
+      // String? userName = await getUserName(user!.uid);
 
-      DateTime dateTime = DateTime.now();
+      // DateTime dateTime = DateTime.now();
 
       final expenseId = await ExpenseModel.generateExpenseId();
 
@@ -62,16 +62,16 @@ class ExpenseController extends GetxController {
       );
 
       DocumentReference documentReference = _firestore
-          .collection('Users')
+          .collection(usersCollection)
           .doc(_auth.currentUser!.uid)
-          .collection('Expenses')
+          .collection(expensesCollection)
           .doc(expenseId);
 
       await documentReference.set(expense.toMap());
 
       Helper.successSnackBar(
         title: 'Sucesso',
-        message: 'Seu rolê foi salvo e guardado com segurnaça.',
+        message: 'Seu rolê foi salvo e guardado com segurança.',
       );
     } catch (e) {
       Helper.errorSnackBar(
@@ -84,9 +84,9 @@ class ExpenseController extends GetxController {
   Future<int> getExpenseNumber(String userId) async {
     try {
       QuerySnapshot expenseSnapshot = await _firestore
-          .collection('Users')
+          .collection(usersCollection)
           .doc(userId)
-          .collection('Expenses')
+          .collection(expensesCollection)
           .get();
 
       return expenseSnapshot.docs.length + 1;
@@ -123,9 +123,9 @@ class ExpenseController extends GetxController {
 
   Stream<QuerySnapshot> stream() {
     _firestore
-        .collection('Users')
+        .collection(usersCollection)
         .doc(_auth.currentUser!.uid)
-        .collection('Expenses')
+        .collection(expensesCollection)
         .snapshots()
         .listen(
       (data) {
@@ -137,5 +137,139 @@ class ExpenseController extends GetxController {
     );
 
     return _streamController.stream;
+  }
+
+  Future<List<ExpenseModel>> fetchExpenses() async {
+    try {
+      final querySnapshot = await _firestore
+          .collection(usersCollection)
+          .doc(_auth.currentUser!.uid)
+          .collection(expensesCollection)
+          .get();
+
+      return querySnapshot.docs.map(
+        (doc) {
+          final data = doc.data();
+          return ExpenseModel.fromMap(data);
+        },
+      ).toList();
+    } catch (e) {
+      log('Erro ao buscar as despesas do usuário: $e');
+      return [];
+    }
+  }
+
+  Future<void> fetchAndEditExpense(
+    String expenseId, {
+    String? newTitle,
+    double? newAmmount,
+    Category? newCategory,
+    String? newDescription,
+  }) async {
+    try {
+      final docRef = _firestore
+          .collection(usersCollection)
+          .doc(_auth.currentUser!.uid)
+          .collection(expensesCollection)
+          .doc(expenseId);
+
+      DocumentSnapshot documentSnapshot = await docRef.get();
+
+      if (!documentSnapshot.exists || documentSnapshot.data() == null) {
+        log('Erro: Despesa não encotrada');
+        return;
+      }
+
+      ExpenseModel expenseModel = ExpenseModel.fromMap(
+        documentSnapshot.data() as Map<String, dynamic>,
+      );
+
+      final updatedExpense = expenseModel.copyWith(
+        title: newTitle ?? expenseModel.title,
+        ammount: newAmmount ?? expenseModel.ammount,
+        category: newCategory ?? expenseModel.category,
+        description: newDescription ?? expenseModel.description,
+      );
+
+      await docRef.update(updatedExpense.toMap());
+
+      Helper.successSnackBar(
+        title: 'Sucesso!',
+        message: 'Seu rolê foi atualizado sem erros.',
+      );
+    } catch (e) {
+      log('Falha na edição da despesa: $e');
+      Helper.errorSnackBar(
+        title: 'Erro',
+        message: 'Houve um erro ao atualizar o rolê, tente de novo mais tarde.',
+      );
+    }
+  }
+
+  Future<ExpenseModel?> getExpenseById(String expenseId) async {
+    try {
+      DocumentSnapshot docSnap = await _firestore
+          .collection(usersCollection)
+          .doc(_auth.currentUser!.uid)
+          .collection(expensesCollection)
+          .doc(expenseId)
+          .get();
+
+      if (docSnap.exists && docSnap.data() != null) {
+        return ExpenseModel.fromMap(
+          docSnap.data() as Map<String, dynamic>,
+        );
+      } else {
+        log('Erro na função getExpenseById');
+        return null;
+      }
+    } catch (e) {
+      log('Erro na função getExpenseById: $e');
+      return null;
+    }
+  }
+
+  Future<void> updateExpense(
+    String expenseId,
+    ExpenseModel updatedExpense,
+  ) async {
+    try {
+      final docRef = _firestore
+          .collection(usersCollection)
+          .doc(_auth.currentUser!.uid)
+          .collection(expensesCollection)
+          .doc(expenseId);
+
+      final docSnap = await docRef.get();
+
+      if (docSnap.exists && docSnap.data() != null) {
+        final existingExpenses = ExpenseModel.fromMap(
+          docSnap.data() as Map<String, dynamic>,
+        );
+
+        final mergedExpense = updatedExpense.copyWith(
+          title: updatedExpense.title ?? existingExpenses.title,
+          ammount: updatedExpense.ammount ?? existingExpenses.ammount,
+          category: updatedExpense.category ?? existingExpenses.category,
+          description:
+              updatedExpense.description ?? existingExpenses.description,
+        );
+
+        await docRef.update(mergedExpense.toMap());
+
+        Helper.successSnackBar(
+          title: 'Booooa Irmão',
+          message: 'Seu rolê foi atualizado e pronto para ver as edições',
+        );
+      } else {
+        log('Erro ao atualizar e/ou não encontrado');
+      }
+    } catch (e) {
+      log('Erro ao atualizar o rolê: $e');
+      Helper.errorSnackBar(
+        title: 'Erro',
+        message: 'Falha ao atualizar o rolê: $e',
+      );
+    }
   }
 }
