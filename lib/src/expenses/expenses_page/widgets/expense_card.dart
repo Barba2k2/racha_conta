@@ -56,13 +56,13 @@ class _ExpenseCardState extends State<ExpenseCard> {
                           child: Row(
                             children: [
                               Icon(
-                                categoryIcons[widget.expenseModel!.category],
+                                categoryIcons[widget.expenseModel.category],
                                 size: 24,
                                 color: isDark ? white90 : blackColor,
                               ),
                               const SizedBox(width: 8),
                               Text(
-                                widget.expenseModel!.title!,
+                                widget.expenseModel.title!,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineMedium!
@@ -83,7 +83,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                               ),
                               Expanded(
                                 child: Text(
-                                  widget.expenseModel!.formattedDate,
+                                  widget.expenseModel.formattedDate,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall!
@@ -99,7 +99,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                         const Gap(5),
                         Expanded(
                           child: Text(
-                            'R\$ ${widget.expenseModel!.ammount.toString()}',
+                            'R\$ ${widget.expenseModel.ammount.toString()}',
                             style:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
                                       color: isDark ? white90 : blackColor,
@@ -108,7 +108,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                         ),
                         Expanded(
                           child: Text(
-                            widget.expenseModel!.description!,
+                            widget.expenseModel.description!,
                             style:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
                                       color: isDark ? white90 : blackColor,
