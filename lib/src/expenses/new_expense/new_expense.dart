@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:racha_conta/src/constants/colors.dart';
 
 import '../../constants/text_strings.dart';
 import '../../models/expense_model.dart';
@@ -176,19 +177,34 @@ class _NewExpenseState extends State<NewExpense> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              OutlinedButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'Cancelar',
-                  style: Theme.of(context).textTheme.headlineSmall,
+              Expanded(
+                child: SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(
+                      'Cancelar',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: _submitExpanseData,
-                child: Text(
-                  'Salvar Despesa',
-                  style: Theme.of(context).textTheme.headlineSmall,
+              Expanded(
+                child: SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: _submitExpanseData,
+                    child: Text(
+                      'Salvar Despesa',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium!
+                          .copyWith(color: whiteColor),
+                    ),
+                  ),
                 ),
               ),
             ],
