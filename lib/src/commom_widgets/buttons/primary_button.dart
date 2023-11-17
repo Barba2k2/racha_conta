@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
 import 'button_loading_widgte.dart';
 
 // Widget personalizado para um botão primário.
@@ -40,7 +41,10 @@ class MyPrimaryButton extends StatelessWidget {
             ? const ButtonLoadingWidget()
             : Text(
                 text.toUpperCase(),
-                style: const TextStyle(fontSize: 18),
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineMedium!
+                    .copyWith(color: whiteColor),
               ),
       ),
     );

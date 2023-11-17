@@ -60,7 +60,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         width: double.infinity,
                         child: OutlinedButton(
                           onPressed: () => Get.to(() => const LoginScreen()),
-                          child: Text(tLogin.toUpperCase()),
+                          child: Text(
+                            tLogin.toUpperCase(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(color: purple),
+                          ),
                         ),
                       ),
                       const Gap(10),
@@ -70,7 +76,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () => Get.to(() => const SignupScreen()),
-                          child: Text(tSignup.toUpperCase()),
+                          child: Text(
+                            tSignup.toUpperCase(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(color: whiteColor),
+                          ),
                         ),
                       ),
                       const Gap(20),

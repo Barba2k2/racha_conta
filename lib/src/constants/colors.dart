@@ -34,6 +34,7 @@ var subtitleColor = const Color.fromARGB(255, 220, 220, 220);
 const whiteBg = Color(0xFFF5F5F5);
 const darkBg = darkNavBar;
 var black85 = Colors.black.withOpacity(0.85);
+const purple = Color(0xFF8B10AE);
 
 //* -- SOCIAL Button COLORS
 const tGoogleBgColor = Color(0xFFDFEFFF);
