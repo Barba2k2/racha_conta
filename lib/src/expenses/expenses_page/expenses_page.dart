@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:racha_conta/src/expenses/expenses_page/widgets/expenses_widget.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text_strings.dart';
@@ -17,10 +18,13 @@ import '../provider/fireauth_provider.dart';
 import 'chart/chart.dart';
 import 'expanses_list/expenses_list.dart';
 import '../new_expense/new_expense.dart';
+import 'expenses/expenses.dart';
 
 class ExpensesScreen extends StatefulWidget {
-  const ExpensesScreen({Key? key, this.expenseModel}) : super(key: key);
+  const ExpensesScreen({Key? key, this.expenseModel, this.userModel})
+      : super(key: key);
   final ExpenseModel? expenseModel;
+  final UserModel? userModel;
 
   @override
   State<ExpensesScreen> createState() => _ExpensesScreenState();
@@ -147,7 +151,6 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 stream: userController.userStream,
                 builder: (context, snapshot) {
                   final user = snapshot.data;
-                  // bool isAdmin = user?.isAdmin ?? false;
                   if (user == null) {
                     return const Text('Nome de usuário não disponivel');
                   } else {
@@ -197,24 +200,21 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 ),
               ],
             ),
-            body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: SizedBox(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Chart(expenses: _registeredExpenses),
-                    Expanded(
-                      child: StreamBuilder<UserModel?>(
-                        stream: userController.userStream,
-                        builder: ((context, snapshot) {
-                          final user = snapshot.data;
-                          return SizedBox();
-                        }),
-                      ),
+            body: SizedBox(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Chart(expenses: _registeredExpenses),
+                  Expanded(
+                    child: StreamBuilder<UserModel?>(
+                      stream: userController.userStream,
+                      builder: ((context, snapshot) {
+                        final user = snapshot.data;
+                        return ExpensesWidget(widget);
+                      }),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             // body: Container(
