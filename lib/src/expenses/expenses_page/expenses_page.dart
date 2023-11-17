@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:racha_conta/src/expenses/expenses_page/widgets/expenses_widget.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text_strings.dart';
@@ -32,24 +31,24 @@ class ExpensesScreen extends StatefulWidget {
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
   final List<ExpenseModel> _registeredExpenses = [
-    ExpenseModel(
-      title: 'Jetete',
-      ammount: 19.99,
-      date: DateTime.now(),
-      category: Category.trabalho,
-      description: 'Teste',
-      expenseId: 'Despesa001',
-      userId: '',
-    ),
-    ExpenseModel(
-      title: 'Cinema',
-      ammount: 15.69,
-      date: DateTime.now(),
-      category: Category.lazer,
-      description: 'Pipoca e ingresso',
-      expenseId: 'Despesa002',
-      userId: '',
-    ),
+    // ExpenseModel(
+    //   title: 'Jetete',
+    //   ammount: 19.99,
+    //   date: DateTime.now(),
+    //   category: Category.trabalho,
+    //   description: 'Teste',
+    //   expenseId: 'Despesa001',
+    //   userId: '',
+    // ),
+    // ExpenseModel(
+    //   title: 'Cinema',
+    //   ammount: 15.69,
+    //   date: DateTime.now(),
+    //   category: Category.lazer,
+    //   description: 'Pipoca e ingresso',
+    //   expenseId: 'Despesa002',
+    //   userId: '',
+    // ),
   ];
 
   void _openAddExpanseOverlay() {
@@ -208,10 +207,9 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                   Expanded(
                     child: StreamBuilder<UserModel?>(
                       stream: userController.userStream,
-                      builder: ((context, snapshot) {
-                        final user = snapshot.data;
+                      builder: (context, snapshot) {
                         return ExpensesWidget(widget);
-                      }),
+                      },
                     ),
                   ),
                 ],
