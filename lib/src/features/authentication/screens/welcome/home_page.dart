@@ -26,72 +26,66 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
     // Construção da tela.
     return SafeArea(
-      child: WillPopScope(
-        // Previne a tela de fechar quando o usuário pressiona o botão voltar.
-        onWillPop: () {
-          return Future.value(false);
-        },
-        child: Scaffold(
-          // Define a cor de fundo com base no modo escuro ou claro.
-          backgroundColor: isDark ? tDarkColor : tWhiteColor,
-          body: Column(
-            children: [
-              const Gap(100),
-              // Imagem de boas-vindas.
-              const SizedBox(
+      child: Scaffold(
+        // Define a cor de fundo com base no modo escuro ou claro.
+        backgroundColor: isDark ? tDarkColor : tWhiteColor,
+        body: Column(
+          children: [
+            const Gap(100),
+            // Imagem de boas-vindas.
+            const SizedBox(
+              height: 300,
+              child: Image(
+                image: AssetImage(moneyLogoPng),
+                width: 300,
                 height: 300,
-                child: Image(
-                  image: AssetImage(moneyLogoPng),
-                  width: 300,
-                  height: 300,
-                  fit: BoxFit.cover,
-                ),
+                fit: BoxFit.cover,
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    // Centraliza os elementos na tela.
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      // Botão de login.
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: OutlinedButton(
-                          onPressed: () => Get.to(() => const LoginScreen()),
-                          child: Text(
-                            tLogin.toUpperCase(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium!
-                                .copyWith(color: purple),
-                          ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  // Centraliza os elementos na tela.
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    // Botão de login.
+                    SizedBox(
+                      height: 60,
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: () => Get.to(() => const LoginScreen()),
+                        child: Text(
+                          tLogin.toUpperCase(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(color: purple),
                         ),
                       ),
-                      const Gap(10),
-                      // Botão de inscrição.
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () => Get.to(() => const SignupScreen()),
-                          child: Text(
-                            tSignup.toUpperCase(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium!
-                                .copyWith(color: whiteColor),
-                          ),
+                    ),
+                    const Gap(10),
+                    // Botão de inscrição.
+                    SizedBox(
+                      height: 60,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () => Get.to(() => const SignupScreen()),
+                        child: Text(
+                          tSignup.toUpperCase(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(color: whiteColor),
                         ),
                       ),
-                      const Gap(20),
-                    ],
-                  ),
+                    ),
+                    const Gap(20),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

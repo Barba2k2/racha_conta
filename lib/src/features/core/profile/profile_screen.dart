@@ -68,96 +68,88 @@ class ProfileScreen extends StatelessWidget {
       () {
         final isDark = themeController.isDarkMode.value;
 
-        return WillPopScope(
-          onWillPop: () async {
-            bool shouldExit = await showExitDialog(context);
-            shouldExit ? SystemNavigator.pop() : null;
-            // Previne a ação padrão do botão de voltar
-            return false;
-          },
-          child: Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () => Get.back(),
-                icon: const Icon(LineAwesomeIcons.angle_left),
-              ),
-              title: Text(
-                profile,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              actions: [
-                IconButton(
-                  onPressed: themeController.toggleTheme,
-                  icon: Icon(
-                    isDark ? LineAwesomeIcons.moon : LineAwesomeIcons.sun,
-                  ),
-                  iconSize: 26,
-                )
-              ],
+        return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () => Get.back(),
+              icon: const Icon(LineAwesomeIcons.angle_left),
             ),
-            body: SingleChildScrollView(
-              child: Container(
-                color: isDark ? darkNavBar : const Color(0xFFF5F5F5),
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    /// -- IMAGE with ICON
-                    const ImageWithIcon(),
-                    const Gap(10),
-                    StreamBuilder<UserModel?>(
-                      stream: userController.userStream,
-                      builder: (context, snapshot) {
-                        UserModel? user = snapshot.data;
-                        return Column(
-                          children: [
-                            Text(
-                              user?.fullName ?? 'Fulano de Tal',
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            ),
-                            Text(
-                              user?.email ?? 'email@email.com',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                    const Gap(20),
-
-                    /// -- BUTTON
-                    MyPrimaryButton(
-                      isFullWidth: false,
-                      width: 200,
-                      text: editProfile,
-                      onPressed: () {
-                        //* Proxima Feature
-                        Get.to(() => UpdateProfileScreen());
-                      },
-                    ),
-                    const Gap(30),
-                    const Divider(),
-                    const Gap(10),
-
-                    /// -- MENU
-                    ProfileMenuWidget(
-                      title: "Configurações",
-                      icon: LineAwesomeIcons.cog,
-                      onPress: () {},
-                    ),
-                    ProfileMenuWidget(
-                      title: "Informações",
-                      icon: LineAwesomeIcons.info,
-                      onPress: () {},
-                    ),
-                    ProfileMenuWidget(
-                      title: "Sair",
-                      icon: LineAwesomeIcons.alternate_sign_out,
-                      textColor: Colors.red,
-                      endIcon: false,
-                      onPress: () => _showLogoutModal(),
-                    ),
-                  ],
+            title: Text(
+              profile,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            actions: [
+              IconButton(
+                onPressed: themeController.toggleTheme,
+                icon: Icon(
+                  isDark ? LineAwesomeIcons.moon : LineAwesomeIcons.sun,
                 ),
+                iconSize: 26,
+              )
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              color: isDark ? darkNavBar : const Color(0xFFF5F5F5),
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  /// -- IMAGE with ICON
+                  const ImageWithIcon(),
+                  const Gap(10),
+                  StreamBuilder<UserModel?>(
+                    stream: userController.userStream,
+                    builder: (context, snapshot) {
+                      UserModel? user = snapshot.data;
+                      return Column(
+                        children: [
+                          Text(
+                            user?.fullName ?? 'Fulano de Tal',
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                          Text(
+                            user?.email ?? 'email@email.com',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                  const Gap(20),
+        
+                  /// -- BUTTON
+                  MyPrimaryButton(
+                    isFullWidth: false,
+                    width: 200,
+                    text: editProfile,
+                    onPressed: () {
+                      //* Proxima Feature
+                      Get.to(() => UpdateProfileScreen());
+                    },
+                  ),
+                  const Gap(30),
+                  const Divider(),
+                  const Gap(10),
+        
+                  /// -- MENU
+                  ProfileMenuWidget(
+                    title: "Configurações",
+                    icon: LineAwesomeIcons.cog,
+                    onPress: () {},
+                  ),
+                  ProfileMenuWidget(
+                    title: "Informações",
+                    icon: LineAwesomeIcons.info,
+                    onPress: () {},
+                  ),
+                  ProfileMenuWidget(
+                    title: "Sair",
+                    icon: LineAwesomeIcons.alternate_sign_out,
+                    textColor: Colors.red,
+                    endIcon: false,
+                    onPress: () => _showLogoutModal(),
+                  ),
+                ],
               ),
             ),
           ),
