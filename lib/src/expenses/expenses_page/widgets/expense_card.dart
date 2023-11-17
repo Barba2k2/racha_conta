@@ -3,17 +3,20 @@ import 'package:gap/gap.dart';
 // import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-import '../../constants/colors.dart';
+import '../../../constants/colors.dart';
 // import '../../controllers/theme_controller/theme_controller.dart';
-import '../../controllers/theme_controller/theme_controller.dart';
-import '../../features/authentication/models/user_model.dart';
-import '../../models/expense_model.dart';
-import '../controllers/user_controller.dart';
-import '../expense_details/expense_details.dart';
+import '../../../controllers/theme_controller/theme_controller.dart';
+import '../../../features/authentication/models/user_model.dart';
+import '../../../models/expense_model.dart';
+import '../../controllers/user_controller.dart';
+import '../../expense_details/expense_details.dart';
 
 class ExpenseCard extends StatefulWidget {
-  const ExpenseCard({super.key, this.expenseModel});
-  final ExpenseModel? expenseModel;
+  const ExpenseCard(
+    this.expenseModel, {
+    super.key,
+  });
+  final ExpenseModel expenseModel;
 
   @override
   State<ExpenseCard> createState() => _ExpenseCardState();
@@ -69,7 +72,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
-                                ' - ',
+                                '-',
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineMedium!
