@@ -135,7 +135,7 @@ const String updateProfile = 'Atualizar Perfil';
 const String deleteAccount = 'Apagar Conta';
 
 //# -- Add Expense Screen --
-const String errorMessage = 'Dados INválidos';
+const String errorMessage = 'Dados Inválidos';
 const String verifyData =
     'Por favor, verifique se inseriu um titulo, valor, data e categoria corretamente.';
 
