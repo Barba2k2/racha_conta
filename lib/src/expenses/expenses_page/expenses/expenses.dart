@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:racha_conta/src/controllers/theme_controller/theme_controller.dart';
@@ -10,6 +9,8 @@ import 'package:racha_conta/src/expenses/expenses_page/expenses_page.dart';
 import '../../../constants/colors.dart';
 import '../../../models/expense_model.dart';
 import '../../controllers/expense_controller.dart';
+import '../widgets/expense_card.dart';
+import '../widgets/expense_detail.dart';
 
 class ExpensesWidget extends StatelessWidget {
   const ExpensesWidget(this.widget, {super.key});
@@ -25,12 +26,12 @@ class ExpensesWidget extends StatelessWidget {
       stream: ExpenseController().stream(),
       builder: (context, snapshot) {
         //! Verifica se há erro no snapshot
-        if(snapshot.hasError) {
+        if (snapshot.hasError) {
           log('Erro da snapshot da pagina expenses: ${snapshot.error}');
         }
 
         //! Verifica se o snapshot está carregando
-        if(snapshot.connectionState == ConnectionState.waiting){
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(
               color: Colors.purple,
@@ -47,7 +48,6 @@ class ExpensesWidget extends StatelessWidget {
             child: Text(
               'Nenhum dado disponível',
               style: TextStyle(color: isDark ? whiteColor : blackColor),
-
             ),
           );
         }
@@ -62,7 +62,19 @@ class ExpensesWidget extends StatelessWidget {
         ).toList();
 
         //@ Contrução da lista de despesas
-        return Container();
+        return ListView.builder(
+          itemBuilder: (context, index) {
+            final expense = expenseList[index];
+
+            return GestureDetector(
+              onTap: () {
+                Get.to(() => ExpenseDetails(expenseModel: expense));
+              },
+              child: ExpenseCard(expense),
+            );
+          },
+          itemCount: expenseList.length,
+        );
       },
     );
   }
