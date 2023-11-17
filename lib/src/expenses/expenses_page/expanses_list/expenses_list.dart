@@ -4,7 +4,7 @@ import 'package:racha_conta/src/constants/colors.dart';
 
 import '../../../controllers/theme_controller/theme_controller.dart';
 import '../../../models/expense_model.dart';
-import '../../widgets/expense_card.dart';
+import '../widgets/expense_card.dart';
 
 class ExpenseList extends StatelessWidget {
   const ExpenseList({
@@ -95,9 +95,7 @@ class ExpenseList extends StatelessWidget {
         onDismissed: (direction) {
           onRemoveExpense(expenses[index]);
         },
-        child: ExpenseCard(
-          expenseModel: expenses[index],
-        ),
+        child: ExpenseCard(expenses[index]),
       ),
     );
   }
