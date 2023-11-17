@@ -156,9 +156,9 @@ class AuthenticationRepository extends GetxController {
     try {
       FirebaseAuth auth = FirebaseAuth.instance;
 
-      await auth
-          .sendPasswordResetEmail(email: email)
-          .then((value) => log('Email enviado'));
+      await auth.sendPasswordResetEmail(email: email).then(
+            (value) => log('Email enviado'),
+          );
     } on FirebaseAuthException catch (e) {
       final result = MyExceptions.fromCode(e.code);
       throw result.message;

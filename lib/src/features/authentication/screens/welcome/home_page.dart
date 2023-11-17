@@ -20,7 +20,6 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-
     // Obtém o controle do tema para verificar se está no modo escuro.
     final ThemeController themeController = Get.find();
     final isDark = themeController.isDarkMode.value;
@@ -60,7 +59,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         height: 60,
                         width: double.infinity,
                         child: OutlinedButton(
-                          onPressed: () => Get.to(const LoginScreen()),
+                          onPressed: () => Get.to(() => const LoginScreen()),
                           child: Text(tLogin.toUpperCase()),
                         ),
                       ),
@@ -70,7 +69,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         height: 60,
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () => Get.to(const SignupScreen()),
+                          onPressed: () => Get.to(() => const SignupScreen()),
                           child: Text(tSignup.toUpperCase()),
                         ),
                       ),

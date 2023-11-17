@@ -127,7 +127,7 @@ class ExpenseModel {
       title: map['Titulo'] ?? '',
       ammount: map['Valor'] ?? '',
       date: (map['Data da Despesa'] as Timestamp).toDate(),
-      category: map['Categoria'] ?? '',
+      category: getCategoryFromString(map['Categoria'] ?? ''),
       description: map['Descricao'] ?? '',
     );
   }
@@ -138,12 +138,20 @@ class ExpenseModel {
     final data = doc.data() ?? {};
     log('Dados do Expense Model: $data');
 
-    const expectFields = [];
+    const expectFields = [
+      'Id da Despesa',
+      'Id do Usuario',
+      'Titulo',
+      'Valor',
+      'Data da Depsesa',
+      'Categoria',
+      'Descricao',
+    ];
 
     for (var field in expectFields) {
       if (!data.containsKey(field)) {
         log('Dados do documento: $data');
-        throw Exception('Campos do docuemnto que estão faltando: $field');
+        throw Exception('Campos do documento que estão faltando: $field');
       }
     }
 
@@ -171,7 +179,8 @@ class ExpenseModel {
       } else {
         // Se o input não for nem Timestamp nem String, lança uma exceção
         throw Exception(
-            'Esperava Timestamp ou String, recebeu ${input.runtimeType}');
+          'Esperava Timestamp ou String, recebeu ${input.runtimeType}',
+        );
       }
     }
 
@@ -216,7 +225,7 @@ class ExpenseModel {
     final userCollection = firestore
         .collection('Users')
         .doc(_auth.currentUser!.uid)
-        .collection('Despesas');
+        .collection('Expenses');
 
     // Inicialização da variável para armazenar o último número da despesa
     int lastUserNumber = 0;
@@ -257,7 +266,7 @@ class ExpenseModel {
       return nextId; // Retorna o próximo ID gerado
     } catch (e) {
       // Registra e lança uma exceção em caso de erro
-      log('Erro: $e');
+      log('Erro ao gerar ID da despesa: $e');
       throw Exception('Erro ao gerar ID da despesa: $e');
     }
   }
@@ -268,12 +277,14 @@ class ExpenseModel {
 class ExpenseBucket {
   ExpenseBucket({required this.category, required this.expenses});
 
-  ExpenseBucket.forCategory(List<ExpenseModel> allExpanses, this.category)
-      : expenses = allExpanses
-            .where(
-              (expense) => expense.category == category,
-            )
-            .toList();
+  ExpenseBucket.forCategory(
+    List<ExpenseModel> allExpanses,
+    this.category,
+  ) : expenses = allExpanses.where(
+          (expense) {
+            return expense.category == category;
+          },
+        ).toList();
 
   final Category category;
   final List<ExpenseModel> expenses;
