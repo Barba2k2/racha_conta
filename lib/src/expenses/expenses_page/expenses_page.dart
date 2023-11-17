@@ -197,25 +197,51 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 ),
               ],
             ),
-            body: Container(
-              color: isDark ? darkBg : whiteBg,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Chart(expenses: _registeredExpenses),
-                  Expanded(
-                    child: mainContent,
-                  ),
-                ],
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SizedBox(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Chart(expenses: _registeredExpenses),
+                    Expanded(
+                      child: StreamBuilder<UserModel?>(
+                        stream: userController.userStream,
+                        builder: ((context, snapshot) {
+                          final user = snapshot.data;
+                          return SizedBox();
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
+            // body: Container(
+            //   color: isDark ? darkBg : whiteBg,
+            //   child: Column(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Chart(expenses: _registeredExpenses),
+            //       Expanded(
+            //         child: mainContent,
+            //       ),
+            //     ],
+            //   ),
+            // ),
             persistentFooterButtons: [
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Novo Rolê'),
+                  onPressed: () => _openAddExpanseOverlay(),
+                  child: Text(
+                    'Novo Rolê'.toUpperCase(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium!
+                        .copyWith(color: whiteColor),
+                  ),
                 ),
               ),
             ],
