@@ -120,7 +120,7 @@ class ExpenseModel {
       'Id do Usuario': userId,
       'Titulo': title,
       'Valor': ammount,
-      'Data da Depsesa': Timestamp.fromDate(date!),
+      'Data da Depsesa': formattedDate,
       'Categoria': category!.categoryDescription,
       'Descricao': description,
     };
@@ -133,7 +133,7 @@ class ExpenseModel {
         userId: map['Id do Usuario'] ?? '',
         title: map['Titulo'] ?? '',
         ammount: map['Valor']?.toDouble() ?? 0.0,
-        date: (map['Data da Depsesa'] as Timestamp?)?.toDate(),
+        date: map['Data da Depsesa'],
         category: getCategoryFromString(map['Categoria'] as String),
         description: map['Descricao'] ?? '',
       );
