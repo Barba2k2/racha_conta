@@ -30,26 +30,34 @@ class ExpensesScreen extends StatefulWidget {
 }
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
-  final List<ExpenseModel> _registeredExpenses = [
-    // ExpenseModel(
-    //   title: 'Jetete',
-    //   ammount: 19.99,
-    //   date: DateTime.now(),
-    //   category: Category.trabalho,
-    //   description: 'Teste',
-    //   expenseId: 'Despesa001',
-    //   userId: '',
-    // ),
-    // ExpenseModel(
-    //   title: 'Cinema',
-    //   ammount: 15.69,
-    //   date: DateTime.now(),
-    //   category: Category.lazer,
-    //   description: 'Pipoca e ingresso',
-    //   expenseId: 'Despesa002',
-    //   userId: '',
-    // ),
-  ];
+  late List<ExpenseModel> _registeredExpenses;
+
+  @override
+  void initState() {
+    super.initState();
+    _registeredExpenses = [];
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (widget.expenseModel != null) {
+      setState(() {
+        _registeredExpenses.add(
+          ExpenseModel(
+            title: widget.expenseModel!.title,
+            ammount: widget.expenseModel!.ammount,
+            date: widget.expenseModel!.date,
+            category: widget.expenseModel!.category,
+            description: widget.expenseModel!.description,
+            expenseId: widget.expenseModel!.expenseId,
+            userId: widget.expenseModel!.userId,
+          ),
+        );
+      });
+    }
+  }
 
   void _openAddExpanseOverlay() {
     showModalBottomSheet(
@@ -105,6 +113,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       mainContent = ExpenseList(
         expenses: _registeredExpenses,
         onRemoveExpense: _removeExpense,
+        expenseWidget: ExpensesWidget(widget),
       );
     }
 
@@ -201,32 +210,18 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
             ),
             body: SizedBox(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Chart(expenses: _registeredExpenses),
-                  Expanded(
-                    child: StreamBuilder<UserModel?>(
-                      stream: userController.userStream,
-                      builder: (context, snapshot) {
-                        return ExpensesWidget(widget);
-                      },
-                    ),
+                  StreamBuilder<UserModel?>(
+                    stream: userController.userStream,
+                    builder: (context, snapshot) {
+                      return mainContent;
+                    },
                   ),
                 ],
               ),
             ),
-            // body: Container(
-            //   color: isDark ? darkBg : whiteBg,
-            //   child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Chart(expenses: _registeredExpenses),
-            //       Expanded(
-            //         child: mainContent,
-            //       ),
-            //     ],
-            //   ),
-            // ),
             persistentFooterButtons: [
               SizedBox(
                 width: double.infinity,
