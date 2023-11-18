@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:racha_conta/src/constants/colors.dart';
 
 import '../../constants/text_strings.dart';
+import '../../controllers/theme_controller/theme_controller.dart';
 import '../../models/expense_model.dart';
 import '../controllers/expense_controller.dart';
 import '../provider/fireauth_provider.dart';
@@ -106,6 +108,8 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeController themeController = Get.find();
+    final isDark = themeController.isDarkMode.value;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
       child: Column(
@@ -209,7 +213,9 @@ class _NewExpenseState extends State<NewExpense> {
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium!
-                          .copyWith(color: purple, fontSize: 19),
+                          .copyWith(
+                              color: isDark ? whiteColor : purple,
+                              fontSize: 19),
                     ),
                   ),
                 ),
