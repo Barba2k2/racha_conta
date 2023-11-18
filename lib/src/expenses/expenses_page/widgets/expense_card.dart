@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 // import 'package:gap/gap.dart';
@@ -29,6 +31,8 @@ class _ExpenseCardState extends State<ExpenseCard> {
 
     final ThemeController themeController = Get.find();
     final isDark = themeController.isDarkMode.value;
+
+    log('Data da despesa: ${widget.expenseModel.formattedDate}');
 
     return StreamBuilder<UserModel?>(
       stream: userController.userStream,
@@ -72,7 +76,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
-                                '-',
+                                ' - ',
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineMedium!
