@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
 import 'button_loading_widgte.dart';
 
 // Widget personalizado para um botão de mídia social.
@@ -55,7 +56,10 @@ class SocialButton extends StatelessWidget {
             ? const ButtonLoadingWidget()
             : Text(
                 text,
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(color: blackColor),
               ),
       ),
     );
