@@ -124,7 +124,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                     children: [
                       //@ Detalhes
                       SizedBox(
-                        width: 120,
+                        width: 135,
                         height: 40,
                         child: ElevatedButton(
                           onPressed: () {
@@ -141,7 +141,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                       ),
                       //# Editar
                       SizedBox(
-                        width: 120,
+                        width: 135,
                         height: 40,
                         child: ElevatedButton(
                           onPressed: () {},
