@@ -106,7 +106,13 @@ class ExpenseModel {
   final Category? category;
   final String? description;
 
-  String get formattedDate => formatter.format(date!);
+  String get formattedDate {
+    if (date != null) {
+      return formatter.format(date!);
+    } else {
+      return '';
+    }
+  }
 
   Map<String, dynamic> toMap() {
     return {
@@ -121,15 +127,20 @@ class ExpenseModel {
   }
 
   factory ExpenseModel.fromMap(Map<String, dynamic> map) {
-    return ExpenseModel(
-      expenseId: map['Id da Despesa'] ?? '',
-      userId: map['Id do Usuario'] ?? '',
-      title: map['Titulo'] ?? '',
-      ammount: map['Valor'] ?? '',
-      date: (map['Data da Despesa'] as Timestamp).toDate(),
-      category: getCategoryFromString(map['Categoria'] ?? ''),
-      description: map['Descricao'] ?? '',
-    );
+    try {
+      return ExpenseModel(
+        expenseId: map['Id da Despesa'] ?? '',
+        userId: map['Id do Usuario'] ?? '',
+        title: map['Titulo'] ?? '',
+        ammount: map['Valor']?.toDouble() ?? 0.0,
+        date: (map['Data da Depsesa'] as Timestamp?)?.toDate(),
+        category: getCategoryFromString(map['Categoria'] as String),
+        description: map['Descricao'] ?? '',
+      );
+    } catch (e) {
+      log('Erro do Factory ExpenseModel: $e');
+      return ExpenseModel();
+    }
   }
 
   factory ExpenseModel.fromSnapshot(
@@ -156,8 +167,10 @@ class ExpenseModel {
     }
 
     // Função para analisar e converter uma data em formato dinâmico para DateTime
-    DateTime parseDate(dynamic input) {
-      if (input is Timestamp) {
+    DateTime? parseDate(dynamic input) {
+      if (input == null) {
+        return null; // Retorna nulo se o input for nulo
+      } else if (input is Timestamp) {
         // Se o input for do tipo Timestamp (Firestore), converte para DateTime e retorna
         return input.toDate();
       } else if (input is String) {
@@ -189,9 +202,9 @@ class ExpenseModel {
       expenseId: data['Id da Despesa'],
       userId: data['Id do Usuario'],
       title: data['Titulo'],
-      ammount: data['Valor'],
+      ammount: data['Valor']?.toDouble(),
       date: parseDate(data['Data da Despesa']),
-      category: getCategoryFromString(data['Categoria'] as String),
+      category: getCategoryFromString(data['Categoria']),
       description: data['Descricao'],
     );
   }
