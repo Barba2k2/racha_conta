@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -26,130 +23,96 @@ class ProfileScreen extends StatelessWidget {
     final UserController userController = Get.find();
     final ThemeController themeController = Get.find();
 
-    /// Método para exibir um diálogo perguntando ao usuário se ele deseja sair do aplicativo.
-    Future<bool> showExitDialog(BuildContext context) async {
-      // Usando Completer para obter o resultado final
-      final completer = Completer<bool>();
-
-      showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Você desja sair?'),
-          content: const Text('Você realmente deseja sair do aplicativo?'),
-          actions: [
-            SizedBox(
-              width: 100,
-              child: OutlinedButton(
-                onPressed: () {
-                  // Indica que o usuário não quer sair
-                  Navigator.of(ctx).pop();
-                  completer.complete(false);
-                },
-                child: const Text("Não"),
-              ),
-            ),
-            MyPrimaryButton(
-              isFullWidth: false,
-              onPressed: () {
-                // Indica que o usuário quer sair
-                Navigator.of(ctx).pop();
-                completer.complete(true);
-              },
-              text: "Sim",
-            ),
-          ],
-        ),
-      );
-
-      return completer.future;
-    }
-
     return Obx(
       () {
         final isDark = themeController.isDarkMode.value;
 
-        return Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () => Get.back(),
-              icon: const Icon(LineAwesomeIcons.angle_left),
+        return SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: Text(
+                profile,
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              actions: [
+                IconButton(
+                  onPressed: themeController.toggleTheme,
+                  icon: Icon(
+                    isDark ? LineAwesomeIcons.moon : LineAwesomeIcons.sun,
+                  ),
+                  iconSize: 26,
+                )
+              ],
             ),
-            title: Text(
-              profile,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            actions: [
-              IconButton(
-                onPressed: themeController.toggleTheme,
-                icon: Icon(
-                  isDark ? LineAwesomeIcons.moon : LineAwesomeIcons.sun,
+            backgroundColor: isDark ? darkNavBar : whiteNavBar,
+            body: SingleChildScrollView(
+              child: Container(
+                color: isDark ? darkNavBar : whiteNavBar,
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    /// -- IMAGE with ICON
+                    const ImageWithIcon(),
+                    const Gap(10),
+                    StreamBuilder<UserModel?>(
+                      stream: userController.userStream,
+                      builder: (context, snapshot) {
+                        UserModel? user = snapshot.data;
+                        return Column(
+                          children: [
+                            Text(
+                              user?.fullName ?? 'Fulano de Tal',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium!
+                                  .copyWith(
+                                      color: isDark ? whiteColor : blackColor),
+                            ),
+                            Text(
+                              user?.email ?? 'email@email.com',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    const Gap(20),
+
+                    /// -- BUTTON
+                    MyPrimaryButton(
+                      isFullWidth: false,
+                      width: 240,
+                      text: editProfile,
+                      onPressed: () {
+                        //* Proxima Feature
+                        Get.to(() => UpdateProfileScreen());
+                      },
+                    ),
+                    const Gap(30),
+                    const Divider(),
+                    const Gap(10),
+
+                    /// -- MENU
+                    ProfileMenuWidget(
+                      title: "Configurações",
+                      icon: LineAwesomeIcons.cog,
+                      onPress: () {},
+                    ),
+                    ProfileMenuWidget(
+                      title: "Informações",
+                      icon: LineAwesomeIcons.info,
+                      onPress: () {},
+                    ),
+                    ProfileMenuWidget(
+                      title: "Sair",
+                      icon: LineAwesomeIcons.alternate_sign_out,
+                      textColor: Colors.red,
+                      endIcon: false,
+                      onPress: () => _showLogoutModal(),
+                    ),
+                  ],
                 ),
-                iconSize: 26,
-              )
-            ],
-          ),
-          body: SingleChildScrollView(
-            child: Container(
-              color: isDark ? darkNavBar : const Color(0xFFF5F5F5),
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  /// -- IMAGE with ICON
-                  const ImageWithIcon(),
-                  const Gap(10),
-                  StreamBuilder<UserModel?>(
-                    stream: userController.userStream,
-                    builder: (context, snapshot) {
-                      UserModel? user = snapshot.data;
-                      return Column(
-                        children: [
-                          Text(
-                            user?.fullName ?? 'Fulano de Tal',
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-                          Text(
-                            user?.email ?? 'email@email.com',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                  const Gap(20),
-        
-                  /// -- BUTTON
-                  MyPrimaryButton(
-                    isFullWidth: false,
-                    width: 200,
-                    text: editProfile,
-                    onPressed: () {
-                      //* Proxima Feature
-                      Get.to(() => UpdateProfileScreen());
-                    },
-                  ),
-                  const Gap(30),
-                  const Divider(),
-                  const Gap(10),
-        
-                  /// -- MENU
-                  ProfileMenuWidget(
-                    title: "Configurações",
-                    icon: LineAwesomeIcons.cog,
-                    onPress: () {},
-                  ),
-                  ProfileMenuWidget(
-                    title: "Informações",
-                    icon: LineAwesomeIcons.info,
-                    onPress: () {},
-                  ),
-                  ProfileMenuWidget(
-                    title: "Sair",
-                    icon: LineAwesomeIcons.alternate_sign_out,
-                    textColor: Colors.red,
-                    endIcon: false,
-                    onPress: () => _showLogoutModal(),
-                  ),
-                ],
               ),
             ),
           ),
