@@ -7,4 +7,12 @@ class FireauthProvider with ChangeNotifier {
   static User? getCurrentUser() {
     return _auth.currentUser;
   }
+
+  static String? getCurrentUserId() {
+    final User? user = getCurrentUser();
+    if (user != null) {
+      return user.uid;
+    }
+    return null;
+  }
 }
