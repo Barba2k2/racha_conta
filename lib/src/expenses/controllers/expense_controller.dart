@@ -45,10 +45,6 @@ class ExpenseController extends GetxController {
     String description,
   ) async {
     try {
-      // String? userName = await getUserName(user!.uid);
-
-      // DateTime dateTime = DateTime.now();
-
       final expenseId = await ExpenseModel.generateExpenseId();
 
       final expense = ExpenseModel(
@@ -81,6 +77,28 @@ class ExpenseController extends GetxController {
     }
   }
 
+  Future<String?> getExpenseId(String expenseId) async {
+    try {
+      DocumentSnapshot expenseDoc = await _firestore
+          .collection(usersCollection)
+          .doc(_auth.currentUser!.uid)
+          .collection(expensesCollection)
+          .doc(expenseId)
+          .get();
+
+      if (expenseDoc.exists) {
+        // Se o documento da despesa existir, retorna o ID da despesa
+        return expenseDoc.id;
+      } else {
+        // Se o documento não existir, retorna null ou lida com isso conforme necessário
+        return null;
+      }
+    } catch (e) {
+      log('Erro ao obter o ID da despesa: $e');
+      return null;
+    }
+  }
+
   Future<int> getExpenseNumber(String userId) async {
     try {
       QuerySnapshot expenseSnapshot = await _firestore
@@ -98,21 +116,24 @@ class ExpenseController extends GetxController {
 
   List getExpenses(AsyncSnapshot snapshot) {
     try {
-      final expenseList = snapshot.data.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
-        return ExpenseModel(
-          expenseId: data['Id da Despesa'],
-          userId: data['Id do Usuario'],
-          title: data['Titulo'],
-          ammount: data['Valor'],
-          date: data['Data da Despesa'],
-          category: data['Categoria'],
-          description: data['Descricao'],
-        );
-      }).toList();
+      final expenseList = snapshot.data.docs.map(
+        (doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          return ExpenseModel(
+            expenseId: data['Id da Despesa'],
+            userId: data['Id do Usuario'],
+            title: data['Titulo'],
+            ammount: data['Valor'],
+            date: data['Data da Despesa'],
+            category: data['Categoria'],
+            description: data['Descricao'],
+          );
+        },
+      ).toList();
       return expenseList;
-    } catch (e) {
-      log('Erro ao obter as despesas: $e');
+    } catch (e, stackTrace) {
+      log('Erro ao obter o ID da despesa: $e');
+      log('Stack Trace: $stackTrace');
       return [];
     }
   }
@@ -153,8 +174,9 @@ class ExpenseController extends GetxController {
           return ExpenseModel.fromMap(data);
         },
       ).toList();
-    } catch (e) {
+    } catch (e, stackTrace) {
       log('Erro ao buscar as despesas do usuário: $e');
+      log('Stack Trace: $stackTrace');
       return [];
     }
   }
