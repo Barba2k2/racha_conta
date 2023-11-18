@@ -52,20 +52,13 @@ class SocialFooter extends StatelessWidget {
               isLoading: controller.isGoogleLoading.value,
               // Define a ação do botão quando pressionado.
               onPressed:
-                  // Verifica se o login do Facebook ou qualquer outra operação de carregamento está em andamento.
                   controller.isLoading.value ?
-                      // Se o login do Facebook ou outra operação estiver carregando, desativa a ação do botão.
-                      () {} :
-                      // Caso contrário, verifica se o login do Google está em andamento.
-                      controller.isGoogleLoading.value ?
-                          // Se o login do Google estiver carregando, desativa a ação do botão.
-                          () {} :
-                          // Se nenhum carregamento estiver em andamento, inicia o processo de login do Google.
-                          () => controller.googleSignIn(),
+                  () {} : controller.isGoogleLoading.value ?
+                  () {} : () => controller.googleSignIn(),
             ),
           ),
           const Gap(20),
-          // Texto clicável para direcionar o usuário a outra página (como cadastro).
+          // Texto clicável para direcionar o usuário a página de cadastro.
           ClickableRichTextWidget(
             text1: text1.tr,
             text2: text2.tr,
