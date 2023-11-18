@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -5,6 +7,8 @@ import 'package:racha_conta/src/constants/colors.dart';
 
 import '../../constants/text_strings.dart';
 import '../../models/expense_model.dart';
+import '../controllers/expense_controller.dart';
+import '../provider/fireauth_provider.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key, required this.onAddExpense});
@@ -21,6 +25,7 @@ class _NewExpenseState extends State<NewExpense> {
   final _expenseDescritption = TextEditingController();
   DateTime? _selectedDate;
   Category _selectedCategory = Category.lazer;
+  final userId = FireauthProvider.getCurrentUserId();
 
   void _presentDatePicker() async {
     final now = DateTime.now();
@@ -36,7 +41,7 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
-  void _submitExpanseData() {
+  void _submitExpanseData() async {
     //* Arrendonda o valor para 2 casas
     final enteredAmount = double.tryParse(_amountController.text);
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
@@ -63,17 +68,33 @@ class _NewExpenseState extends State<NewExpense> {
       return;
     }
 
-    widget.onAddExpense(
-      ExpenseModel(
-        title: _titleController.text,
-        ammount: enteredAmount,
-        date: _selectedDate!,
-        category: _selectedCategory,
-        description: _expenseDescritption.text.trim(),
-        expenseId: '',
-        userId: '',
-      ),
+    final expenseId = await ExpenseController().getExpenseId(userId.toString());
+    log('Id da depsesa criada: $expenseId');
+
+    // Cria uma nova despesa
+    final newExpense = ExpenseModel(
+      title: _titleController.text,
+      ammount: enteredAmount,
+      date: _selectedDate!,
+      category: _selectedCategory,
+      description: _expenseDescritption.text.trim(),
+      expenseId: expenseId,
+      userId: userId,
     );
+
+    log('Dados da despesa: $newExpense');
+
+    // Salva a despesa no banco de dados
+    await ExpenseController().addNewExpense(
+      _titleController.text,
+      enteredAmount,
+      _selectedDate!,
+      _selectedCategory,
+      _expenseDescritption.text.trim(),
+    );
+
+    // Chama a função passada como argumento (onAddExpense) com a despesa criada
+    widget.onAddExpense(newExpense);
     Navigator.pop(context);
   }
 
@@ -179,13 +200,16 @@ class _NewExpenseState extends State<NewExpense> {
             children: [
               Expanded(
                 child: SizedBox(
-                  width: 150,
+                  width: 155,
                   height: 50,
                   child: OutlinedButton(
                     onPressed: () => Navigator.pop(context),
                     child: Text(
                       'Cancelar',
-                      style: Theme.of(context).textTheme.headlineMedium,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium!
+                          .copyWith(color: purple, fontSize: 19),
                     ),
                   ),
                 ),
@@ -193,7 +217,7 @@ class _NewExpenseState extends State<NewExpense> {
               const SizedBox(width: 10),
               Expanded(
                 child: SizedBox(
-                  width: 150,
+                  width: 155,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: _submitExpanseData,
@@ -202,7 +226,7 @@ class _NewExpenseState extends State<NewExpense> {
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium!
-                          .copyWith(color: whiteColor),
+                          .copyWith(color: whiteColor, fontSize: 19),
                     ),
                   ),
                 ),
