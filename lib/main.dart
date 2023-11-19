@@ -12,6 +12,7 @@ import 'src/repository/authentication_repository/authentication_repository.dart'
 Future<void> main() async {
   // Garante a inicialização do binding de widgets do Flutter
   WidgetsFlutterBinding.ensureInitialized();
+  
 
   // Inicializa o Firebase com as opções padrão para a plataforma atual e coloca o `AuthenticationRepository` no GetX para gerenciamento de estado
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
