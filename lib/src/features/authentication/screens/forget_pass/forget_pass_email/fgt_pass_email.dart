@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:racha_conta/src/features/authentication/screens/login/login_screen.dart';
 
 import '../../../../../commom_widgets/form/form_header_widget.dart';
 import '../../../../../constants/colors.dart';
@@ -38,7 +39,7 @@ class _ForgetPasswordMailScreenState extends State<ForgetPasswordMailScreen> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, size: 30.0),
             onPressed: () {
-              Get.offAll(() => const WelcomeScreen());
+              Get.to(() => const LoginScreen());
             },
           ),
         ),
@@ -77,11 +78,15 @@ class _ForgetPasswordMailScreenState extends State<ForgetPasswordMailScreen> {
                       // Botão de envio
                       SizedBox(
                         width: double.infinity,
+                        height: 60,
                         child: ElevatedButton(
                           onPressed: sendResetPasswordEmail,
                           child: Text(
                             'Enviar',
-                            style: Theme.of(context).textTheme.headlineSmall,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineLarge!
+                                .copyWith(color: whiteColor),
                           ),
                         ),
                       ),
