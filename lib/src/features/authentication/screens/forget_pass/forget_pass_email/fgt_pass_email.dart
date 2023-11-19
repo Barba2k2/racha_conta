@@ -14,7 +14,6 @@ import '../../../../../controllers/theme_controller/theme_controller.dart';
 import '../../../../../utils/helper/helper_controller.dart';
 import '../../../controllers/login_controller.dart';
 import '../../email_has_sent/email_sent.dart';
-import '../../welcome/home_page.dart';
 
 class ForgetPasswordMailScreen extends StatefulWidget {
   const ForgetPasswordMailScreen({Key? key}) : super(key: key);
