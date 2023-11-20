@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:racha_conta/src/constants/colors.dart';
 
 import '../../../constants/text_strings.dart';
 import '../../authentication/controllers/profile_controller.dart';
@@ -95,9 +96,10 @@ class ProfileFormScreen extends StatelessWidget {
               },
               child: Text(
                 editProfile,
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.7,
+                      color: whiteColor,
                     ),
               ),
             ),
@@ -109,12 +111,12 @@ class ProfileFormScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: 150,
+                width: 170,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent.withOpacity(0.1),
+                    backgroundColor: Colors.redAccent.withOpacity(0.15),
                     elevation: 0,
                     foregroundColor: Colors.red,
                     side: BorderSide.none,

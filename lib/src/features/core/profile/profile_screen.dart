@@ -67,7 +67,8 @@ class ProfileScreen extends StatelessWidget {
                                   .textTheme
                                   .headlineMedium!
                                   .copyWith(
-                                      color: isDark ? whiteColor : blackColor),
+                                    color: isDark ? whiteColor : blackColor,
+                                  ),
                             ),
                             Text(
                               user?.email ?? 'email@email.com',
