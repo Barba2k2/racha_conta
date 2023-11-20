@@ -63,14 +63,11 @@ class UserController extends GetxController {
 
   /// Stream que observa as mudanças nos dados do usuário.
   Stream<UserModel?> get userStream {
-    return _db.collection("Users").snapshots().map(
-      (querySnapshot) {
-        if (querySnapshot.docs.isNotEmpty) {
-          return UserModel.fromSnapshot(querySnapshot.docs.first);
-        }
-        return null;
-      },
-    );
+    return _db.collection("Users").doc(_auth.currentUser!.uid).snapshots().map(
+          (snapshot) => snapshot.exists && snapshot.data() != null
+              ? UserModel.fromSnapshot(snapshot)
+              : null,
+        );
   }
 
   // Função privada para carregar os dados do usuário atualmente autenticado.
