@@ -6,8 +6,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../expenses/expenses_page/expenses_page.dart';
 import '../../features/authentication/models/user_model.dart';
 import '../../features/authentication/screens/update_or_register/update_or_register_screen.dart';
+import '../../features/authentication/screens/welcome/home_page.dart';
 import '../../features/core/nav_bar/navigation_bar.dart';
 import '../../utils/helper/helper_controller.dart';
 import 'exceptions/exceptions.dart';
@@ -40,7 +42,9 @@ class AuthenticationRepository extends GetxController {
 
   //! Verifica se o usuário está logado ou não
   setInitialScreen(User? user) async {
-    // user == null ? Get.offAll(() => WelcomeScreen()) : Get.offAll(() => const Expenses());
+    user == null
+        ? Get.offAll(() => const WelcomeScreen())
+        : Get.offAll(() => const ExpensesScreen());
   }
 
   // Verifica se o login falhou devido a credenciais inválidas
