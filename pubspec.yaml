@@ -21,7 +21,7 @@ dependencies:
   firebase_storage: ^11.4.1
   cloud_firestore: ^4.12.2
   google_sign_in: ^6.1.5
-  flutter_native_splash: ^2.3.5
+  flutter_native_splash: ^2.3.6
   line_awesome_flutter: ^2.0.0
   google_fonts: ^6.1.0
   flutter_otp_text_field: ^1.1.1
@@ -33,6 +33,18 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+
+flutter_native_splash: 
+  color: "#F7F6F1"
+  color_dark: "#272727"
+  image: assets/images/icon.png
+  image_dark: assets/images/icon.png
+  
+  android_12:
+    image: assets/images/icon.png
+    icon_background_color: "#F7F6F1"
+    image_dark: assets/images/icon.png
+    icon_background_color_dark: "#272727"
 
 flutter:
   uses-material-design: true
