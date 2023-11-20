@@ -31,68 +31,73 @@ class UpdateProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeController themeController = Get.find();
     final isDark = themeController.isDarkMode.value;
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(LineAwesomeIcons.angle_left),
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: const Icon(LineAwesomeIcons.angle_left),
+          ),
+          title: Text(
+            editProfile,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          backgroundColor: isDark ? darkNavBar : whiteNavBar,
         ),
-        title: Text(
-          editProfile,
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: isDark ? darkNavBar : const Color(0xFFF5F5F5),
-          padding: const EdgeInsets.all(20),
+        backgroundColor: isDark ? darkNavBar : whiteNavBar,
+        body: SingleChildScrollView(
+          child: Container(
+            color: isDark ? darkNavBar : whiteNavBar,
+            padding: const EdgeInsets.all(20),
 
-          /// -- Future Builder para carregar os dados do usuário
-          child: FutureBuilder(
-            future: controller.getUserData(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  UserModel user = snapshot.data as UserModel;
+            /// -- Future Builder para carregar os dados do usuário
+            child: FutureBuilder(
+              future: controller.getUserData(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData) {
+                    UserModel user = snapshot.data as UserModel;
 
-                  //Controllers
-                  final email = TextEditingController(text: user.email);
-                  final password = TextEditingController(text: user.password);
-                  final fullName = TextEditingController(text: user.fullName);
-                  final phoneNo = TextEditingController(text: user.phoneNo);
+                    //Controllers
+                    final email = TextEditingController(text: user.email);
+                    final password = TextEditingController(text: user.password);
+                    final fullName = TextEditingController(text: user.fullName);
+                    final phoneNo = TextEditingController(text: user.phoneNo);
 
-                  //Imagem & Form
-                  return Column(
-                    children: [
-                      /// -- IMAGE with ICON
-                      const ImageWithIcon(),
-                      const Gap(50),
+                    //Imagem & Form
+                    return Column(
+                      children: [
+                        /// -- IMAGE with ICON
+                        const ImageWithIcon(),
+                        const Gap(50),
 
-                      /// -- Form (Passa os dados para o FormScreen)
-                      ProfileFormScreen(
-                        fullName: fullName,
-                        email: email,
-                        phoneNo: phoneNo,
-                        password: password,
-                        user: user,
-                      ),
-                    ],
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text(snapshot.error.toString()),
-                  );
+                        /// -- Form (Passa os dados para o FormScreen)
+                        ProfileFormScreen(
+                          fullName: fullName,
+                          email: email,
+                          phoneNo: phoneNo,
+                          password: password,
+                          user: user,
+                        ),
+                      ],
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text('Algo saiu errado'),
+                    );
+                  }
                 } else {
                   return const Center(
-                    child: Text('Algo saiu errado'),
+                    child: CircularProgressIndicator(),
                   );
                 }
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
+              },
+            ),
           ),
         ),
       ),
