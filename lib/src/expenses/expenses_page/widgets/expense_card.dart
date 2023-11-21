@@ -2,16 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-// import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
-// import '../../controllers/theme_controller/theme_controller.dart';
 import '../../../controllers/theme_controller/theme_controller.dart';
 import '../../../features/authentication/models/user_model.dart';
 import '../../../models/expense_model.dart';
+import '../../controllers/expense_controller.dart';
 import '../../controllers/user_controller.dart';
-import '../../expense_details/expense_details.dart';
 
 class ExpenseCard extends StatefulWidget {
   const ExpenseCard(
@@ -28,17 +26,14 @@ class _ExpenseCardState extends State<ExpenseCard> {
   @override
   Widget build(BuildContext context) {
     final UserController userController = Get.find();
+    final ExpenseController expenseController = Get.find();
 
     final ThemeController themeController = Get.find();
     final isDark = themeController.isDarkMode.value;
 
-    log('Data da despesa: ${widget.expenseModel.formattedDate}');
-
     return StreamBuilder<UserModel?>(
       stream: userController.userStream,
       builder: (context, snapshot) {
-        // final user = snapshot.data;
-
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
           child: Container(
@@ -75,40 +70,33 @@ class _ExpenseCardState extends State<ExpenseCard> {
                                     ),
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              Text(
-                                ' - ',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium!
-                                    .copyWith(
-                                      color: isDark ? white90 : blackColor,
-                                    ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  widget.expenseModel.formattedDate,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall!
-                                      .copyWith(
-                                        color: isDark ? white90 : blackColor,
-                                      ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
                             ],
                           ),
                         ),
                         const Gap(5),
-                        Expanded(
-                          child: Text(
-                            'R\$ ${widget.expenseModel.ammount.toString()}',
-                            style:
-                                Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      color: isDark ? white90 : blackColor,
-                                    ),
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              'R\$ ${widget.expenseModel.ammount.toString()}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    color: isDark ? white90 : blackColor,
+                                  ),
+                            ),
+                            Text(
+                              ' - ${widget.expenseModel.formattedDate}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    color: isDark ? white90 : blackColor,
+                                  ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
                         ),
                         Expanded(
                           child: Text(
@@ -126,23 +114,6 @@ class _ExpenseCardState extends State<ExpenseCard> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      //@ Detalhes
-                      SizedBox(
-                        width: 135,
-                        height: 40,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.to(() => const ExpenseDatails());
-                          },
-                          child: Text(
-                            'Detalhes',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium!
-                                .copyWith(color: whiteColor),
-                          ),
-                        ),
-                      ),
                       //# Editar
                       SizedBox(
                         width: 135,
@@ -151,6 +122,29 @@ class _ExpenseCardState extends State<ExpenseCard> {
                           onPressed: () {},
                           child: Text(
                             'Editar',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(color: whiteColor),
+                          ),
+                        ),
+                      ),
+                      //@ Apagar
+                      SizedBox(
+                        width: 135,
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            final expenseId = widget.expenseModel.expenseId;
+                            if (expenseId != null) {
+                              expenseController.deleteExpense(expenseId);
+                            } else {
+                              // Lidar com o cenário em que o ID é nulo, se necessário
+                            }
+                            log('Apagando despesa');
+                          },
+                          child: Text(
+                            'Apagar',
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium!
