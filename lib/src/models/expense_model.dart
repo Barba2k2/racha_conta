@@ -110,6 +110,7 @@ class ExpenseModel {
     if (date != null) {
       return formatter.format(date!);
     } else {
+      log('Erro na data');
       return '';
     }
   }
@@ -120,7 +121,7 @@ class ExpenseModel {
       'Id do Usuario': userId,
       'Titulo': title,
       'Valor': ammount,
-      'Data da Depsesa': formattedDate,
+      'Data da Despesa': Timestamp.fromDate(date!),
       'Categoria': category!.categoryDescription,
       'Descricao': description,
     };
@@ -133,7 +134,7 @@ class ExpenseModel {
         userId: map['Id do Usuario'] ?? '',
         title: map['Titulo'] ?? '',
         ammount: map['Valor']?.toDouble() ?? 0.0,
-        date: map['Data da Depsesa'],
+        date: (map['Data da Despesa'] as Timestamp).toDate(),
         category: getCategoryFromString(map['Categoria'] as String),
         description: map['Descricao'] ?? '',
       );
@@ -154,7 +155,7 @@ class ExpenseModel {
       'Id do Usuario',
       'Titulo',
       'Valor',
-      'Data da Depsesa',
+      'Data da Despesa',
       'Categoria',
       'Descricao',
     ];
