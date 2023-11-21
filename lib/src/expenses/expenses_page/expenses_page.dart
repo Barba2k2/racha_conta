@@ -17,7 +17,6 @@ import '../provider/fireauth_provider.dart';
 import 'chart/chart.dart';
 import 'expanses_list/expenses_list.dart';
 import '../new_expense/new_expense.dart';
-import 'expenses/expenses.dart';
 
 class ExpensesScreen extends StatefulWidget {
   const ExpensesScreen({Key? key, this.expenseModel, this.userModel})
@@ -75,31 +74,6 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     });
   }
 
-  void _removeExpense(ExpenseModel expense) {
-    final expenseIndex = _registeredExpenses.indexOf(expense);
-    setState(() {
-      _registeredExpenses.remove(expense);
-    });
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        duration: Duration(seconds: 5),
-        content: Text('Despesa apagada.'),
-        action: SnackBarAction(
-          label: 'Desfazer',
-          onPressed: () {
-            setState(() {
-              _registeredExpenses.insert(
-                expenseIndex,
-                expense,
-              );
-            });
-          },
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     Widget mainContent = const Center(
@@ -110,11 +84,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     );
 
     if (_registeredExpenses.isNotEmpty) {
-      mainContent = ExpenseList(
-        expenses: _registeredExpenses,
-        onRemoveExpense: _removeExpense,
-        expenseWidget: ExpensesWidget(widget),
-      );
+      mainContent = ExpensesList();
     }
 
     // Obtém instâncias dos controladores de usuário e tema usando `Get.find()`.
