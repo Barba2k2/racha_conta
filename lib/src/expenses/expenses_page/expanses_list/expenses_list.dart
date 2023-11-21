@@ -81,7 +81,6 @@ class _ExpensesListState extends State<ExpensesList> {
                     return GestureDetector(
                       onTap: () {
                         Get.to(() => ExpenseDetails(expenseModel: expense));
-                        log('Botão detalhes');
                       },
                       child: ExpenseCard(expense),
                     );
@@ -93,7 +92,6 @@ class _ExpensesListState extends State<ExpensesList> {
                         Get.to(
                           () => ExpenseDetails(expenseModel: firestoreExpense),
                         );
-                        log('Botão detalhes');
                       },
                       child: ExpenseCard(firestoreExpense),
                     );

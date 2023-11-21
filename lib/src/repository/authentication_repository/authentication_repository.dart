@@ -140,13 +140,17 @@ class AuthenticationRepository extends GetxController {
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
 
+      log('Credencias: $credential');
+
       // Redirecionar para Expanses após o login bem sucedido
       Get.to(() => const MyNavigationBar());
 
       // Uma vez conectado, retorne o UserCredential
       return userCredential;
-    } on FirebaseAuthException catch (e) {
-      log('Erro do Firestore na criação de usuário com Google: $e');
+    } on FirebaseAuthException catch (e, stackTrace) {
+      log(
+        'Erro do Firestore na criação de usuário com Google: ${e.code}, ${e.message}, $stackTrace',
+      );
       final ex = MyExceptions.fromCode(e.code);
       throw ex.message;
     } catch (e) {

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:racha_conta/src/expenses/expenses_page/widgets/expenses_edit.dart';
 
 import '../../../constants/colors.dart';
 import '../../../controllers/theme_controller/theme_controller.dart';
@@ -119,7 +120,16 @@ class _ExpenseCardState extends State<ExpenseCard> {
                         width: 135,
                         height: 40,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            final expenseId = widget.expenseModel.expenseId;
+                            if (expenseId != null) {
+                              Get.to(
+                                () => EditExpenseScreen(expenseId: expenseId),
+                              );
+                            } else {
+                              log('Erro ao recuperar o Id da despesa');
+                            }
+                          },
                           child: Text(
                             'Editar',
                             style: Theme.of(context)

@@ -19,6 +19,8 @@ class ExpenseController extends GetxController {
   static const usersCollection = 'Users';
   static const expensesCollection = 'Expenses';
 
+  final RxList<ExpenseModel> expenses = <ExpenseModel>[].obs;
+
   // Função para obter o nome completo do usuário com base no ID do usuário
   Future<String?> getUserName(String userId) async {
     // Busca o documento do usuário no Firestore pelo seu ID
@@ -295,6 +297,27 @@ class ExpenseController extends GetxController {
     }
   }
 
+  // Método para carregar as despesas do Firestore
+  Future<void> loadExpenses() async {
+    try {
+      final querySnapshot = await _firestore
+          .collection(usersCollection)
+          .doc(_auth.currentUser!.uid)
+          .collection(expensesCollection)
+          .get();
+
+      expenses.assignAll(querySnapshot.docs.map(
+        (doc) {
+          final data = doc.data();
+          return ExpenseModel.fromMap(data);
+        },
+      ));
+    } catch (e, stackTrace) {
+      log('Erro ao buscar as despesas do usuário: $e');
+      log('Stack Trace: $stackTrace');
+    }
+  }
+
   // Método para apagar uma despesa com base no ID da despesa
   Future<void> deleteExpense(String expenseId) async {
     try {
@@ -308,6 +331,9 @@ class ExpenseController extends GetxController {
 
       if (docSnap.exists) {
         await docRef.delete();
+
+        // Remova a despesa da lista local de despesas
+        expenses.removeWhere((expense) => expense.expenseId == expenseId);
 
         Helper.successSnackBar(
           title: 'Despesa Apagada',
