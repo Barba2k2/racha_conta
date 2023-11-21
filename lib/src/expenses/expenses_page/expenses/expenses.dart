@@ -3,19 +3,19 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:racha_conta/src/controllers/theme_controller/theme_controller.dart';
-import 'package:racha_conta/src/expenses/expenses_page/expenses_page.dart';
 
 import '../../../constants/colors.dart';
+import '../../../controllers/theme_controller/theme_controller.dart';
 import '../../../models/expense_model.dart';
 import '../../controllers/expense_controller.dart';
+import '../expanses_list/expenses_list.dart';
 import '../widgets/expense_card.dart';
 import '../widgets/expense_detail.dart';
 
 class ExpensesWidget extends StatelessWidget {
   const ExpensesWidget(this.widget, {super.key});
 
-  final ExpensesScreen widget;
+  final ExpensesList widget;
 
   @override
   Widget build(BuildContext context) {
