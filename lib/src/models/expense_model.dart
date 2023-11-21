@@ -314,4 +314,8 @@ class ExpenseBucket {
 
     return sum;
   }
+
+  void removeExpense(String expenseId) {
+    expenses.removeWhere((expense) => expense.expenseId == expenseId);
+  }
 }
