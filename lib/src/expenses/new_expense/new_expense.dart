@@ -71,7 +71,7 @@ class _NewExpenseState extends State<NewExpense> {
     }
 
     final expenseId = await ExpenseController().getExpenseId(userId.toString());
-    log('Id da depsesa criada: $expenseId');
+    log('Id da despesa criada: $expenseId');
 
     // Cria uma nova despesa
     final newExpense = ExpenseModel(
