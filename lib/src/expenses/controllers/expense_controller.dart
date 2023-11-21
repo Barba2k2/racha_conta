@@ -294,4 +294,37 @@ class ExpenseController extends GetxController {
       );
     }
   }
+
+  // Método para apagar uma despesa com base no ID da despesa
+  Future<void> deleteExpense(String expenseId) async {
+    try {
+      final docRef = _firestore
+          .collection(usersCollection)
+          .doc(_auth.currentUser!.uid)
+          .collection(expensesCollection)
+          .doc(expenseId);
+
+      final docSnap = await docRef.get();
+
+      if (docSnap.exists) {
+        await docRef.delete();
+
+        Helper.successSnackBar(
+          title: 'Despesa Apagada',
+          message: 'Sua despesa foi removida com sucesso.',
+        );
+      } else {
+        Helper.errorSnackBar(
+          title: 'Erro ⚠️',
+          message: 'Despesa não encontrada para exclusão.',
+        );
+      }
+    } catch (e) {
+      log('Erro ao apagar despesa: $e');
+      Helper.errorSnackBar(
+        title: 'Erro ⚠️',
+        message: 'Falha ao apagar despesa: $e',
+      );
+    }
+  }
 }
