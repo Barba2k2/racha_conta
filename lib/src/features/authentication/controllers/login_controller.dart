@@ -44,7 +44,7 @@ class LoginController extends GetxController {
       if (!loginResult.success) {
         Helper.errorSnackBar(
           title: 'Poxa',
-          message: loginResult.errorMessage!,
+          message: 'Erro no login: ${loginResult.errorMessage!}',
         );
         isLoading.value = false;
         return;
@@ -55,7 +55,7 @@ class LoginController extends GetxController {
       isLoading.value = false;
       Helper.errorSnackBar(
         title: 'Poxa',
-        message: e.toString(),
+        message: 'Erro de login: $e',
       );
     }
   }
@@ -85,7 +85,7 @@ class LoginController extends GetxController {
     } catch (e) {
       isGoogleLoading.value = false;
       log('Erro de login com google: $e');
-      Helper.errorSnackBar(title: 'Poxa', message: e.toString());
+      Helper.errorSnackBar(title: 'Poxa', message: 'Erro: $e');
     }
   }
 
