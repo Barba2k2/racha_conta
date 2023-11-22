@@ -11,8 +11,8 @@ import '../../constants/colors.dart';
 import '../../constants/text_strings.dart';
 import '../../controllers/theme_controller/theme_controller.dart';
 import '../../features/authentication/models/user_model.dart';
-import '../../models/expense_model.dart';
 import '../controllers/user_controller.dart';
+import '../models/expense_model.dart';
 import '../provider/fireauth_provider.dart';
 import 'chart/chart.dart';
 import 'expanses_list/expenses_list.dart';
@@ -46,7 +46,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         _registeredExpenses.add(
           ExpenseModel(
             title: widget.expenseModel!.title,
-            ammount: widget.expenseModel!.ammount,
+            amount: widget.expenseModel!.amount,
             date: widget.expenseModel!.date,
             category: widget.expenseModel!.category,
             description: widget.expenseModel!.description,
@@ -76,10 +76,24 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget mainContent = const Center(
+    final ThemeController themeController = Get.find();
+    final isDark = themeController.isDarkMode.value;
+
+    Widget mainContent = Center(
       child: Padding(
         padding: EdgeInsets.all(16),
-        child: Text(emptyExpenses),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              emptyExpenses,
+              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    color: isDark ? whiteColor : blackColor,
+                  ),
+            ),
+          ],
+        ),
       ),
     );
 
@@ -89,7 +103,6 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
     // Obtém instâncias dos controladores de usuário e tema usando `Get.find()`.
     final UserController userController = Get.find();
-    final ThemeController themeController = Get.find();
     User? usuarioLogado = FireauthProvider.getCurrentUser();
 
     if (usuarioLogado != null) {
@@ -103,10 +116,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     // Widget observável que reage às mudanças de estado (mudanças no modo escuro/claro)
     return Obx(
       () {
-        // Define se o modo escuro está ativado ou não
-        final isDark = themeController.isDarkMode.value;
-
-        // Estrutura principal da página de chamados
+        // Estrutura principal da página
         return SafeArea(
           child: Scaffold(
             // Chave baseada no modo escuro ou claro
