@@ -28,6 +28,11 @@ Future<void> main() async {
   FlutterError.onError = (FlutterErrorDetails details) {
     log('Detalhes de exceção: ${details.exception}');
     log('Detalhes de stack: ${details.stack}');
+    log('Informação adicional: ${details.informationCollector?.call() ?? "Vazio"}');
+    log('Contexto do erro: ${details.context}');
+    log('Biblioteca do erro: ${details.library}');
+    log('Silent Error: ${details.silent}');
+    log('Filtro de Stack: ${details.stackFilter}');
   };
 
   // Inicia o aplicativo
