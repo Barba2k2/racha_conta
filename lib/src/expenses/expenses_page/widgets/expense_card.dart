@@ -24,11 +24,54 @@ class ExpenseCard extends StatefulWidget {
 }
 
 class _ExpenseCardState extends State<ExpenseCard> {
+  final ExpenseController expenseController = Get.find();
+
+  Future<void> _confirmDeleteExpense(String expenseId) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Deseja deletar esse dado?',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          content: Text(
+            'Você tem mesmo certeza que deseja apagar?',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text(
+                'Cancelar',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                expenseController.deleteExpense(expenseId);
+                log('Deleting expense');
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text(
+                'Apagar',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(color: whiteColor),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final UserController userController = Get.find();
-    final ExpenseController expenseController = Get.find();
-
     final ThemeController themeController = Get.find();
     final isDark = themeController.isDarkMode.value;
 
@@ -147,7 +190,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                           onPressed: () {
                             final expenseId = widget.expenseModel.expenseId;
                             if (expenseId != null) {
-                              expenseController.deleteExpense(expenseId);
+                              _confirmDeleteExpense(expenseId);
                             } else {
                               // Lidar com o cenário em que o ID é nulo, se necessário
                             }
