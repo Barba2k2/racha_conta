@@ -35,12 +35,11 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   void initState() {
     super.initState();
     _registeredExpenses = [];
+    _loadExpenses();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
+  // Método para carregar as despesas do banco de dados
+  void _loadExpenses() async {
     if (widget.expenseModel != null) {
       setState(() {
         _registeredExpenses.add(
@@ -82,17 +81,11 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     Widget mainContent = Center(
       child: Padding(
         padding: EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              emptyExpenses,
-              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    color: isDark ? whiteColor : blackColor,
-                  ),
-            ),
-          ],
+        child: Text(
+          emptyExpenses,
+          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                color: isDark ? whiteColor : blackColor,
+              ),
         ),
       ),
     );
@@ -113,114 +106,105 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       log('Nenhum usuário logado.');
     }
 
-    // Widget observável que reage às mudanças de estado (mudanças no modo escuro/claro)
-    return Obx(
-      () {
-        // Estrutura principal da página
-        return SafeArea(
-          child: Scaffold(
-            // Chave baseada no modo escuro ou claro
-            key: ValueKey(Get.isDarkMode),
+    return SafeArea(
+      child: Scaffold(
+        key: ValueKey(Get.isDarkMode),
+        backgroundColor: isDark ? tDarkColor : Colors.grey.shade200,
 
-            // Cor de fundo baseada no modo escuro ou claro
-            backgroundColor: isDark ? tDarkColor : Colors.grey.shade200,
+        // Barra de aplicativo
+        appBar: AppBar(
+          // Configurações de cores e aparência baseadas no modo escuro ou claro
+          backgroundColor: isDark ? darkBg : whiteBg,
+          foregroundColor: isDark ? darkBg : whiteBg,
+          elevation: 0,
+          centerTitle: true,
+          automaticallyImplyLeading: false,
 
-            // Barra de aplicativo
-            appBar: AppBar(
-              // Configurações de cores e aparência baseadas no modo escuro ou claro
-              backgroundColor: isDark ? darkBg : whiteBg,
-              foregroundColor: isDark ? darkBg : whiteBg,
-              elevation: 0,
-              centerTitle: true,
-              automaticallyImplyLeading: false,
-
-              // Título exibindo informações do usuário
-              title: StreamBuilder<UserModel?>(
-                stream: userController.userStream,
-                builder: (context, snapshot) {
-                  final user = snapshot.data;
-                  if (user == null) {
-                    return const Text('Nome de usuário não disponivel');
-                  } else {
-                    // Mostra a imagem e o nome do usuário
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.amber.shade400,
-                        radius: 25,
-                        child: Image.asset('assets/images/avatar.png'),
-                      ),
-                      title: Text(
-                        'Olá, Bem-Vindo!',
-                        style: Theme.of(context).textTheme.titleSmall,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      subtitle: Text(
-                        user.fullName, //# Nome do usuário logado
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    );
-                  }
-                },
-              ),
-
-              // Ações na barra de aplicativos (calendário e notificações)
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          CupertinoIcons.calendar,
-                          color: isDark ? tWhiteColor : tDarkColor,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          CupertinoIcons.bell,
-                          color: isDark ? tWhiteColor : tDarkColor,
-                        ),
-                      ),
-                    ],
+          // Título exibindo informações do usuário
+          title: StreamBuilder<UserModel?>(
+            stream: userController.userStream,
+            builder: (context, snapshot) {
+              final user = snapshot.data;
+              if (user == null) {
+                return const Text('Nome de usuário não disponivel');
+              } else {
+                // Mostra a imagem e o nome do usuário
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.amber.shade400,
+                    radius: 25,
+                    child: Image.asset('assets/images/avatar.png'),
                   ),
-                ),
-              ],
-            ),
-            body: SizedBox(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                  title: Text(
+                    'Olá, Bem-Vindo!',
+                    style: Theme.of(context).textTheme.titleSmall,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  subtitle: Text(
+                    user.fullName, //# Nome do usuário logado
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                );
+              }
+            },
+          ),
+
+          // Ações na barra de aplicativos (calendário e notificações)
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
                 children: [
-                  Chart(expenses: _registeredExpenses),
-                  StreamBuilder<UserModel?>(
-                    stream: userController.userStream,
-                    builder: (context, snapshot) {
-                      return mainContent;
-                    },
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      CupertinoIcons.calendar,
+                      color: isDark ? tWhiteColor : tDarkColor,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      CupertinoIcons.bell,
+                      color: isDark ? tWhiteColor : tDarkColor,
+                    ),
                   ),
                 ],
               ),
             ),
-            persistentFooterButtons: [
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () => _openAddExpanseOverlay(),
-                  child: Text(
-                    'Novo Rolê'.toUpperCase(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium!
-                        .copyWith(color: whiteColor),
-                  ),
-                ),
+          ],
+        ),
+        body: SizedBox(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Chart(expenses: _registeredExpenses),
+              StreamBuilder<UserModel?>(
+                stream: userController.userStream,
+                builder: (context, snapshot) {
+                  return mainContent;
+                },
               ),
             ],
           ),
-        );
-      },
+        ),
+        persistentFooterButtons: [
+          SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: () => _openAddExpanseOverlay(),
+              child: Text(
+                'Novo Rolê'.toUpperCase(),
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineMedium!
+                    .copyWith(color: whiteColor),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
