@@ -92,7 +92,7 @@ class ExpenseModel {
     this.expenseId,
     this.userId,
     this.title,
-    this.ammount,
+    this.amount,
     this.date,
     this.category,
     this.description,
@@ -101,7 +101,7 @@ class ExpenseModel {
   final String? expenseId;
   final String? userId;
   final String? title;
-  final double? ammount;
+  final double? amount;
   final DateTime? date;
   final Category? category;
   final String? description;
@@ -120,7 +120,7 @@ class ExpenseModel {
       'Id da Despesa': expenseId,
       'Id do Usuario': userId,
       'Titulo': title,
-      'Valor': ammount,
+      'Valor': amount,
       'Data da Despesa': Timestamp.fromDate(date!),
       'Categoria': category!.categoryDescription,
       'Descricao': description,
@@ -133,7 +133,7 @@ class ExpenseModel {
         expenseId: map['Id da Despesa'] ?? '',
         userId: map['Id do Usuario'] ?? '',
         title: map['Titulo'] ?? '',
-        ammount: map['Valor']?.toDouble() ?? 0.0,
+        amount: map['Valor']?.toDouble() ?? 0.0,
         date: (map['Data da Despesa'] as Timestamp).toDate(),
         category: getCategoryFromString(map['Categoria'] as String),
         description: map['Descricao'] ?? '',
@@ -203,7 +203,7 @@ class ExpenseModel {
       expenseId: data['Id da Despesa'],
       userId: data['Id do Usuario'],
       title: data['Titulo'],
-      ammount: data['Valor']?.toDouble(),
+      amount: data['Valor']?.toDouble(),
       date: parseDate(data['Data da Despesa']),
       category: getCategoryFromString(data['Categoria']),
       description: data['Descricao'],
@@ -223,7 +223,7 @@ class ExpenseModel {
       expenseId: expenseId ?? this.expenseId,
       userId: userId ?? this.userId,
       title: title ?? this.title,
-      ammount: ammount ?? this.ammount,
+      amount: ammount ?? this.amount,
       date: date ?? this.date,
       category: category ?? this.category,
       description: description ?? this.description,
@@ -288,34 +288,4 @@ class ExpenseModel {
 
 //* Agrupara os dados de forma resumida
 //* Agrupa os dados de mesma categoria
-class ExpenseBucket {
-  ExpenseBucket({required this.category, required this.expenses});
 
-  ExpenseBucket.forCategory(
-    List<ExpenseModel> allExpanses,
-    this.category,
-  ) : expenses = allExpanses.where(
-          (expense) {
-            return expense.category == category;
-          },
-        ).toList();
-
-  final Category category;
-  final List<ExpenseModel> expenses;
-
-  double get totalExpenses {
-    double sum = 0;
-
-    for (final expense in expenses) {
-      //* sum = sum + expense.amount
-      //* mesma função, escrita de formas diferentes
-      sum += expense.ammount!;
-    }
-
-    return sum;
-  }
-
-  void removeExpense(String expenseId) {
-    expenses.removeWhere((expense) => expense.expenseId == expenseId);
-  }
-}
