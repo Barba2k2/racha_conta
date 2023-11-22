@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
 import '../../../controllers/theme_controller/theme_controller.dart';
-import '../../../models/expense_model.dart';
+import '../../models/expense_model.dart';
 import '../../controllers/expense_controller.dart';
 import '../expanses_list/expenses_list.dart';
 import '../widgets/expense_card.dart';

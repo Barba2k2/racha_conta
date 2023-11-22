@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
 import '../../../controllers/theme_controller/theme_controller.dart';
-import '../../../models/expense_model.dart';
+import '../../models/expense_model.dart';
 import '../../controllers/expense_controller.dart';
 
 class ExpenseDetails extends StatefulWidget {
@@ -118,7 +118,7 @@ class _ExpenseDetailsState extends State<ExpenseDetails> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      widget.expenseModel.ammount!.toString(),
+                      widget.expenseModel.amount!.toString(),
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ),

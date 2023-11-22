@@ -6,8 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../models/expense_model.dart';
 import '../../utils/helper/helper_controller.dart';
+import '../models/expense_model.dart';
 
 class ExpenseController extends GetxController {
   // Inicializações das instâncias do Firebase
@@ -53,7 +53,7 @@ class ExpenseController extends GetxController {
         expenseId: expenseId,
         userId: user!.uid,
         title: title,
-        ammount: ammount,
+        amount: ammount,
         date: date,
         category: category,
         description: description,
@@ -125,7 +125,7 @@ class ExpenseController extends GetxController {
             expenseId: data['Id da Despesa'],
             userId: data['Id do Usuario'],
             title: data['Titulo'],
-            ammount: data['Valor'],
+            amount: data['Valor'],
             date: data['Data da Despesa'],
             category: data['Categoria'],
             description: data['Descricao'],
@@ -210,7 +210,7 @@ class ExpenseController extends GetxController {
 
       final updatedExpense = expenseModel.copyWith(
         title: newTitle ?? expenseModel.title,
-        ammount: newAmmount ?? expenseModel.ammount,
+        ammount: newAmmount ?? expenseModel.amount,
         category: newCategory ?? expenseModel.category,
         description: newDescription ?? expenseModel.description,
       );
@@ -273,7 +273,7 @@ class ExpenseController extends GetxController {
 
         final mergedExpense = updatedExpense.copyWith(
           title: updatedExpense.title ?? existingExpenses.title,
-          ammount: updatedExpense.ammount ?? existingExpenses.ammount,
+          ammount: updatedExpense.amount ?? existingExpenses.amount,
           category: updatedExpense.category ?? existingExpenses.category,
           description:
               updatedExpense.description ?? existingExpenses.description,
@@ -306,12 +306,16 @@ class ExpenseController extends GetxController {
           .collection(expensesCollection)
           .get();
 
-      expenses.assignAll(querySnapshot.docs.map(
-        (doc) {
-          final data = doc.data();
-          return ExpenseModel.fromMap(data);
-        },
-      ));
+      expenses.assignAll(
+        querySnapshot.docs.map(
+          (doc) {
+            final data = doc.data();
+            return ExpenseModel.fromMap(data);
+          },
+        ),
+      );
+
+      update();
     } catch (e, stackTrace) {
       log('Erro ao buscar as despesas do usuário: $e');
       log('Stack Trace: $stackTrace');
@@ -334,6 +338,8 @@ class ExpenseController extends GetxController {
 
         // Remova a despesa da lista local de despesas
         expenses.removeWhere((expense) => expense.expenseId == expenseId);
+
+        update();
 
         Helper.successSnackBar(
           title: 'Despesa Apagada',

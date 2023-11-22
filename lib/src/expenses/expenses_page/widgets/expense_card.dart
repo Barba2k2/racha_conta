@@ -8,7 +8,7 @@ import 'package:racha_conta/src/expenses/expenses_page/widgets/expenses_edit.dar
 import '../../../constants/colors.dart';
 import '../../../controllers/theme_controller/theme_controller.dart';
 import '../../../features/authentication/models/user_model.dart';
-import '../../../models/expense_model.dart';
+import '../../models/expense_model.dart';
 import '../../controllers/expense_controller.dart';
 import '../../controllers/user_controller.dart';
 
@@ -79,7 +79,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              'R\$ ${widget.expenseModel.ammount.toString()}',
+                              'R\$ ${widget.expenseModel.amount.toString()}',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!

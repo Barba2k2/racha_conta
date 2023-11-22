@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../constants/colors.dart';
 import '../../../controllers/theme_controller/theme_controller.dart';
-import '../../../models/expense_model.dart';
+import '../../models/expense_model.dart';
 import '../../controllers/expense_controller.dart';
 import '../../provider/fireauth_provider.dart';
 
@@ -45,7 +45,7 @@ class _EditExpenseScreenState extends State<EditExpenseScreen> {
       if (expense != null) {
         setState(() {
           _titleController.text = expense.title ?? '';
-          _amountController.text = expense.ammount?.toString() ?? '';
+          _amountController.text = expense.amount?.toString() ?? '';
           _selectedDate = expense.date;
           _selectedCategory = expense.category ?? Category.lazer;
           _expenseDescription.text = expense.description ?? '';
@@ -102,7 +102,7 @@ class _EditExpenseScreenState extends State<EditExpenseScreen> {
 
     final newExpense = ExpenseModel(
       title: _titleController.text,
-      ammount: enteredAmount,
+      amount: enteredAmount,
       date: _selectedDate!,
       category: _selectedCategory,
       description: _expenseDescription.text.trim(),
