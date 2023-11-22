@@ -210,7 +210,7 @@ class ExpenseController extends GetxController {
 
       final updatedExpense = expenseModel.copyWith(
         title: newTitle ?? expenseModel.title,
-        ammount: newAmmount ?? expenseModel.amount,
+        amount: newAmmount ?? expenseModel.amount,
         category: newCategory ?? expenseModel.category,
         description: newDescription ?? expenseModel.description,
       );
@@ -273,7 +273,7 @@ class ExpenseController extends GetxController {
 
         final mergedExpense = updatedExpense.copyWith(
           title: updatedExpense.title ?? existingExpenses.title,
-          ammount: updatedExpense.amount ?? existingExpenses.amount,
+          amount: updatedExpense.amount ?? existingExpenses.amount,
           category: updatedExpense.category ?? existingExpenses.category,
           description:
               updatedExpense.description ?? existingExpenses.description,

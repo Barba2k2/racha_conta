@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:racha_conta/src/models/expense_model.dart';
 
 import '../../../constants/colors.dart';
 import '../../../controllers/theme_controller/theme_controller.dart';
+import '../../models/expense_model.dart';
+import 'bucket_model/expense_bucket.dart';
 import 'chart_bar.dart';
 
 class Chart extends StatelessWidget {

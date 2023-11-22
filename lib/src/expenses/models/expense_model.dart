@@ -214,7 +214,7 @@ class ExpenseModel {
     final String? expenseId,
     final String? userId,
     final String? title,
-    final double? ammount,
+    final double? amount,
     final DateTime? date,
     final Category? category,
     final String? description,
@@ -223,7 +223,7 @@ class ExpenseModel {
       expenseId: expenseId ?? this.expenseId,
       userId: userId ?? this.userId,
       title: title ?? this.title,
-      amount: ammount ?? this.amount,
+      amount: amount ?? this.amount,
       date: date ?? this.date,
       category: category ?? this.category,
       description: description ?? this.description,
@@ -285,7 +285,3 @@ class ExpenseModel {
     }
   }
 }
-
-//* Agrupara os dados de forma resumida
-//* Agrupa os dados de mesma categoria
-
