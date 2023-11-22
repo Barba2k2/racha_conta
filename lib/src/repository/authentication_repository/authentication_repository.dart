@@ -6,7 +6,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../expenses/expenses_page/expenses_page.dart';
 import '../../features/authentication/models/user_model.dart';
 import '../../features/authentication/screens/update_or_register/update_or_register_screen.dart';
 import '../../features/authentication/screens/welcome/home_page.dart';
@@ -29,7 +28,7 @@ class AuthenticationRepository extends GetxController {
     _firebaseUser = Rx<User?>(_auth.currentUser);
     _firebaseUser.bindStream(_auth.userChanges());
     FlutterNativeSplash.remove();
-    // setInitialScreen(_firebaseUser.value);
+    setInitialScreen(_firebaseUser.value);
     super.onReady();
   }
 
@@ -44,7 +43,7 @@ class AuthenticationRepository extends GetxController {
   setInitialScreen(User? user) async {
     user == null
         ? Get.offAll(() => const WelcomeScreen())
-        : Get.offAll(() => const ExpensesScreen());
+        : Get.offAll(() => const MyNavigationBar());
   }
 
   // Verifica se o login falhou devido a credenciais inválidas
